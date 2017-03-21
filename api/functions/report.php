@@ -12,8 +12,8 @@ class Report {
 				
 				while($row = $result->fetch_array()) {
 					array_push($jsonArray, array(
-						$row["id"],
-						$row["name"]
+						"id"	=> $row["id"],
+						"name"	=> $row["name"]
 					));
 				}
 				
@@ -26,8 +26,8 @@ class Report {
 				
 				while($row = $result->fetch_array()) {
 					array_push($jsonArray, array(
-						$row["id"],
-						$row["name"]
+						"id"	=> $row["id"],
+						"name"	=> $row["name"]
 					));
 				}
 				
@@ -40,8 +40,9 @@ class Report {
 				
 				while($row = $result->fetch_array()) {
 					array_push($jsonArray, array(
-						$row["category_id"],
-						$row["building"]
+						"id"			=> $row["id"],
+						"category_id"	=> $row["category_id"],
+						"building"		=> $row["building"]
 					));
 				}
 				
