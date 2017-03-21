@@ -8,7 +8,6 @@ class CreateTables {
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				category_id INT NOT NULL,
 				building TINYTEXT NOT NULL,
-				description MEDIUMTEXT NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");
@@ -25,7 +24,6 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."category (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
-				description MEDIUMTEXT NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");

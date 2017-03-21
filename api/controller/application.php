@@ -45,11 +45,6 @@ final class APP {
 						self::$report->get($_GET['data']);
 					}
 					break;
-
-				case "test":
-					print_r(APP::getMysqli());
-					break;
-
 				default:
 					break;
 			}
