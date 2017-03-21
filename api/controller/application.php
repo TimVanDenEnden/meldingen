@@ -28,14 +28,15 @@ final class APP {
 
 	public function run() {
 		if ($this->database->hasError()) {
-			$this->library->getGErrorPage("Database Error", $this->database->getErrorMessage());
+			//$this->library->getGErrorPage("Database Error", $this->database->getErrorMessage());
+			// 500 ERROR
 			exit;
 		}
 		
 		if (isset($_REQUEST['sys']) && $_REQUEST['sys'] != null) {
 			switch ($_REQUEST['sys']) {
-				case "sys1":
-					//$this->library->getFAQPage();
+				case "test":
+					print_r(APP::getMysqli());
 					break;
 				default:
 					//$this->library->getSystemNotFound();
