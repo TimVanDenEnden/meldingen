@@ -5,6 +5,7 @@
  *
  * @author	Stijn van Nieulande <info@stijndevelopment.nl>
  * @author	Tim van den Enden <tim.vd_evden@me.com>
+ *
  */
 
 final class APP {
