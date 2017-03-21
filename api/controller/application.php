@@ -30,6 +30,7 @@ final class APP {
 		if ($this->database->hasError()) {
 			//$this->library->getGErrorPage("Database Error", $this->database->getErrorMessage());
 			// 500 ERROR
+			echo "500 ERROR";
 			exit;
 		}
 		
@@ -39,6 +40,7 @@ final class APP {
 					print_r(APP::getMysqli());
 					break;
 				default:
+
 					//$this->library->getSystemNotFound();
 			}
 		} else {
