@@ -12,36 +12,46 @@ final class APP {
 	
 	private $database;
 	private static $mysqli;
+	private static $report;
 	
 	public function __construct() {
 		session_start();
 		
 		require _ROOT."/includes/database.php";
 		require _ROOT."/includes/databaseCreateTables.php";
+		require _ROOT."/functions/report.php";
 		
 		$this->database = new Database();
 		self::$mysqli = $this->database->getMysqli();
 		if (!$this->database->hasError()) {
 			new CreateTables();
 		}
+
+		self::$report = new Report();
+
 	}
 
 	public function run() {
 		if ($this->database->hasError()) {
 			//$this->library->getGErrorPage("Database Error", $this->database->getErrorMessage());
-			// 500 ERROR
-			echo "500 ERROR";
+			header($_SERVER["SERVER_PROTOCOL"]." 500 Internal server error");
 			exit;
 		}
 		
-		if (isset($_REQUEST['sys']) && $_REQUEST['sys'] != null) {
-			switch ($_REQUEST['sys']) {
+		if (isset($_GET['sys']) && $_GET['sys'] != null) {
+			switch ($_GET['sys']) {
+				case "report":
+					if (isset($_GET['data']) && $_GET['data'] != null) {
+						self::$report->get($_GET['data']);
+					}
+					break;
+
 				case "test":
 					print_r(APP::getMysqli());
 					break;
-				default:
 
-					//$this->library->getSystemNotFound();
+				default:
+					break;
 			}
 		} else {
 			header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
