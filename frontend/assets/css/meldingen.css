@@ -55,6 +55,48 @@ section.content {
     font-size: 20px;
 }
 
+.margin0 {
+    margin: 0px !important;
+}
+
+.mldColor {
+    background: #111133;
+}
+
+.mldColor h2 {
+    color: #fff !important;
+}
+
+.form-group .form-line:after {
+    border-bottom: 2px solid #111133;
+}
+
+.btn-group-justified .btn{
+    width: 50% !important;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:focus {
+    background: #111133 !important;
+}
+
+.dtp > .dtp-content > .dtp-date-view > header.dtp-header {
+    background: #111133 !important;
+}
+
+.dtp div.dtp-date, .dtp div.dtp-time {
+    background: #111133 !important;
+}
+
+.dtp table.dtp-picker-days tr td a.selected {
+    background: #111133 !important;
+}
+
+.btnSubmit {
+    margin-bottom: 20px;
+    background: #111133 !important;
+    color: #fff;
+}
+
 @media (max-width: 750px) {
 	.p-sm-0 {
     	padding-left: 0!important;

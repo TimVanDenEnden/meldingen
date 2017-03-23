@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Meldingen</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.jpg" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../assets/plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!--WaitMe Css-->
+    <link href="../assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+
+        <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="../assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../assets/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/meldingen.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../assets/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <section style="display: none">
+        <aside id="leftsidebar" class="sidebar">
+            <div class="menu">
+                <ul class="list">
+                    <li class="header active"></li>
+                </ul>
+            </div>
+        </aside>
+    </section>
+    <section class="content">
+
+        <div class="container p-sm-0">
+            <div class="headerImage"></div>
+            <div class="block-header">
+                <div class="card">
+                    <div class="header headerTitle">
+                        Wat wilt u te melden?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+                        <!-- Textarea -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header mldColor">
+                            <h2>vraag met text antw</h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 margin0">
+                                    <div class="form-group margin0">
+                                        <div class="form-line">
+                                            <textarea rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- int -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header mldColor">
+                            <h2>nummer</h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 margin0">
+                                    <div class="form-group margin0">
+                                        <div class="form-line">
+                                            <input type="number" class="form-control no-resize" placeholder="Please enter the number...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Select -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header mldColor">
+                            <h2>
+                                Antw met ja of nee
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 margin0">
+                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
+                                        <button type="button" class="btn btn-info waves-effect locked_active">JA</button>
+                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">NEE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Select -->
+
+             <!-- Select -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header mldColor">
+                            <h2>
+                                WapenList
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 margin0">
+                                    <select class="form-control show-tick">
+                                        <option value="">Klik hier om te ja of nee te kiezen</option>
+                                        <option value="0">Ja</option>
+                                        <option value="1">Nee</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Select -->
+
+            <!--DateTime Picker -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header mldColor">
+                            <h2>
+                                DATETIME PICKER
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 margin0">
+                                    <div class="form-group margin0">
+                                        <div class="form-line">
+                                            <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header mldColor">
+                            <h2>
+                                Voeg dingen toe
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12 margin0">
+                                    <div class="form-group margin0">
+                                        <div class="form-line">
+                                        <div class="table-responsive">
+                                            <table class="table ">
+                                                <td style="vertical-align: middle;">nfhf</td>
+                                                <td style="width: 50px;">
+                                                    <button type="button" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float">
+                                                        <i class="material-icons">mode_edit</i>
+                                                    </button>
+                                                </td>
+                                                <td style="width: 50px;">
+                                                    <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </td>
+                                            </table>
+                                        </div>
+                                            <button type="button" class="btn btnSubmit btn-block btn-lg btn-default waves-effect">voeg ding toe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btnSubmit btn-block btn-lg btn-default waves-effect">Submit</button>
+            <!--#END# DateTime Picker -->
+
+
+        </div>
+        
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('.btn-toggle').click(function() {
+            $(this).find('.btn').toggleClass('active');  
+            
+            if ($(this).find('.btn-primary').size()>0) {
+                $(this).find('.btn').toggleClass('btn-primary');
+            }
+            if ($(this).find('.btn-danger').size()>0) {
+                $(this).find('.btn').toggleClass('btn-danger');
+            }
+            if ($(this).find('.btn-success').size()>0) {
+                $(this).find('.btn').toggleClass('btn-success');
+            }
+            if ($(this).find('.btn-info').size()>0) {
+                $(this).find('.btn').toggleClass('btn-info');
+            }
+            
+            $(this).find('.btn').toggleClass('btn-default');
+               
+        });
+    </script>
+
+    <!-- Jquery Core Js -->
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../assets/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="../assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+        <!-- Autosize Plugin Js -->
+    <script src="../assets/plugins/autosize/autosize.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../assets/plugins/node-waves/waves.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../assets/plugins/momentjs/moment.js"></script>
+
+    <!-- Wait Me Plugin Js -->
+    <script src="../assets/plugins/waitme/waitMe.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/pages/cards/basic.js"></script>
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../assets/js/demo.js"></script>
+</body>
+</html>
