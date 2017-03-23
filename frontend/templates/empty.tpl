@@ -6,30 +6,36 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Meldingen</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.jpg" type="image/x-icon">
+    <link rel="icon" href="{{ SiteURL }}frontend/assets/favicon.jpg" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="../assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ SiteURL }}frontend/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="../assets/plugins/node-waves/waves.css" rel="stylesheet" />
+    <link href="{{ SiteURL }}frontend/assets/plugins/node-waves/waves.css" rel="stylesheet" />
 
     <!--WaitMe Css-->
-    <link href="../assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+    <link href="{{ SiteURL }}frontend/assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+
+        <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="{{ SiteURL }}frontend/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="{{ SiteURL }}frontend/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="../assets/plugins/animate-css/animate.css" rel="stylesheet" />
+    <link href="{{ SiteURL }}frontend/assets/plugins/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="../assets/css/style.css" rel="stylesheet">
-    <link href="../assets/css/meldingen.css" rel="stylesheet">
+    <link href="{{ SiteURL }}frontend/assets/css/style.css" rel="stylesheet">
+    <link href="{{ SiteURL }}frontend/assets/css/meldingen.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="../assets/css/themes/all-themes.css" rel="stylesheet" />
+    <link href="{{ SiteURL }}frontend/assets/css/themes/all-themes.css" rel="stylesheet" />
 </head>
 
 <body class="theme-red">
@@ -59,34 +65,64 @@
         </aside>
     </section>
     <section class="content">
-
-    {{ CONTENT | raw }}
-
+		{{ CONTENT | raw }}
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('.btn-toggle').click(function() {
+            $(this).find('.btn').toggleClass('active');  
+            
+            if ($(this).find('.btn-primary').size()>0) {
+                $(this).find('.btn').toggleClass('btn-primary');
+            }
+            if ($(this).find('.btn-danger').size()>0) {
+                $(this).find('.btn').toggleClass('btn-danger');
+            }
+            if ($(this).find('.btn-success').size()>0) {
+                $(this).find('.btn').toggleClass('btn-success');
+            }
+            if ($(this).find('.btn-info').size()>0) {
+                $(this).find('.btn').toggleClass('btn-info');
+            }
+            
+            $(this).find('.btn').toggleClass('btn-default');
+               
+        });
+    </script>
 
     <!-- Jquery Core Js -->
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="../assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Select Plugin Js -->
-    <script src="../assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+        <!-- Autosize Plugin Js -->
+    <script src="{{ SiteURL }}frontend/assets/plugins/autosize/autosize.js"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="../assets/plugins/node-waves/waves.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/plugins/node-waves/waves.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="{{ SiteURL }}frontend/assets/plugins/momentjs/moment.js"></script>
 
     <!-- Wait Me Plugin Js -->
-    <script src="../assets/plugins/waitme/waitMe.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/plugins/waitme/waitMe.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="{{ SiteURL }}frontend/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Custom Js -->
-    <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/pages/cards/basic.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/js/admin.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/js/pages/cards/basic.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/js/pages/forms/basic-form-elements.js"></script>
 
     <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
+    <script src="{{ SiteURL }}frontend/assets/js/demo.js"></script>
 </body>
 </html>

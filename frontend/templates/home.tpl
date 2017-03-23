@@ -1,4 +1,6 @@
-﻿<div class="container p-sm-0">
+﻿{{ test }}
+
+<div class="container p-sm-0">
     <div class="headerImage"></div>
     <div class="block-header">
         <div class="card">

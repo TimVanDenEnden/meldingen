@@ -76,6 +76,11 @@ class CreateTables {
 		");
 		
 		/*
+			status:
+				0: Open
+				1: Solved
+				2: Transferred
+		
 			sex:
 				0: onbekend
 				1: man
@@ -111,20 +116,20 @@ class CreateTables {
 				status INT(1) NOT NULL,
 				created TIMESTAMP,
 				modified TIMESTAMP,
-				description MEDIUMTEXT NOT NULL,
-				unconscious INT(1) NOT NULL,
-				victim TINYTEXT NOT NULL,
-				victimname TINYTEXT NOT NULL,
-				weapontype_id INT NOT NULL,
-				weapontypeother TINYTEXT NOT NULL,
-				weaponlocation TINYTEXT NOT NULL,
-				fightercount INT NOT NULL,
-				isweaponpresent INT(1) NOT NULL,
-				drugsaction_id INT NOT NULL,
-				stolenobject MEDIUMTEXT NOT NULL,
+				description MEDIUMTEXT,
+				unconscious INT(1),
+				victim TINYTEXT,
+				victimname TINYTEXT,
+				weapontype_id INT,
+				weapontypeother TINYTEXT,
+				weaponlocation TINYTEXT,
+				fightercount INT,
+				isweaponpresent INT(1),
+				drugsaction_id INT,
+				stolenobject MEDIUMTEXT,
 				dateoftheft TIMESTAMP,
-				contact_id INT NOT NULL,
-				location_id INT NOT NULL,
+				contact_id INT,
+				location_id INT,
 				timestamp TIMESTAMP
 			)
 		");

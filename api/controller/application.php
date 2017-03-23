@@ -41,7 +41,9 @@ final class APP {
 		if (isset($_GET['sys']) && $_GET['sys'] != null) {
 			switch ($_GET['sys']) {
 				case "report":
-					if (isset($_GET['data']) && $_GET['data'] != null) {
+					if (isset($_POST["postreport"])) {
+						self::$report->postReport();
+					} else if (isset($_GET['data']) && $_GET['data'] != null) {
 						self::$report->get($_GET['data']);
 					}
 					break;
