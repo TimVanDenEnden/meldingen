@@ -14,8 +14,10 @@ defined("_DB_PASSWORD")			?: define("_DB_PASSWORD",		"CPZ5ETttmt8N0uIv");
 defined("_DB_DATABASE")			?: define("_DB_DATABASE",		"Meldingen");
 defined("_DB_PREFIX")			?: define("_DB_PREFIX",			"Meld_");
 
-defined("_ROOTFOLDER") 			?: define("_ROOTFOLDER",		"/meldingen");
+defined("_ROOTFOLDER") 			?: define("_ROOTFOLDER",		"");
 defined("_PageTitle") 			?: define("_PageTitle",			"Meldingen");
+
+defined("_API_URL") 			?: define("_API_URL",			"http://meldingen.dev/api/");
 
 defined("_ShowErrors") 			?: define("_ShowErrors",		true);
 

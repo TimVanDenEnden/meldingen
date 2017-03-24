@@ -23,7 +23,17 @@ class LibraryManager {
 	
 	public function getHomePage() {
 		$loader = new Loader(new MainTemplate());
-		echo $this->renderPage("Home", $loader->load('home'));
+		echo $this->renderPage("Categorie", $loader->load('home'));
+	}
+	
+	public function getLocationPage() {
+		$loader = new Loader(new MainTemplate());
+		echo $this->renderPage("Locatie", $loader->load('location'));
+	}
+	
+	public function getCategoryDetailsPage() {
+		$loader = new Loader(new MainTemplate());
+		echo $this->renderPage("Details", $loader->load('details'));
 	}
 	
 	public function getPageNotFound() {

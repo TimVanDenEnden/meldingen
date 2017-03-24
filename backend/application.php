@@ -122,13 +122,11 @@ final class APP {
 				}
 			}
 			*/
-		} else if (isset($_REQUEST['page']) && $_REQUEST['page'] != null) {
-			switch ($_REQUEST['page']) {
-				case "home":
-					APP::getLibraryManager()->getHomePage();
-					break;
-				default:
-					APP::getLibraryManager()->getPageNotFound();
+		} else if (isset($_REQUEST['category']) && $_REQUEST['category'] != null) {
+			if (isset($_REQUEST['location']) && $_REQUEST['location'] != null) {
+				APP::getLibraryManager()->getCategoryDetailsPage();
+			} else {
+				APP::getLibraryManager()->getLocationPage();
 			}
 		} else {
 			APP::getLibraryManager()->getHomePage();

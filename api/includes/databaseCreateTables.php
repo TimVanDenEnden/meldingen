@@ -8,6 +8,7 @@ class CreateTables {
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				category_id INT NOT NULL,
 				building TINYTEXT NOT NULL,
+				image_id INT NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");
@@ -24,6 +25,7 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."category (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
+				image_id INT NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");
@@ -130,6 +132,15 @@ class CreateTables {
 				dateoftheft TIMESTAMP,
 				contact_id INT,
 				location_id INT,
+				timestamp TIMESTAMP
+			)
+		");
+		
+		$this->create("
+			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."images (
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				type TINYTEXT NOT NULL,
+				data LONGBLOB NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");

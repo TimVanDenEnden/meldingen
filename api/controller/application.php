@@ -13,6 +13,7 @@ final class APP {
 	private $database;
 	private static $mysqli;
 	private static $report;
+	private static $images;
 	
 	public function __construct() {
 		session_start();
@@ -20,6 +21,7 @@ final class APP {
 		require _ROOT."/includes/database.php";
 		require _ROOT."/includes/databaseCreateTables.php";
 		require _ROOT."/functions/report.php";
+		require _ROOT."/functions/images.php";
 		
 		$this->database = new Database();
 		self::$mysqli = $this->database->getMysqli();
@@ -28,6 +30,7 @@ final class APP {
 		}
 
 		self::$report = new Report();
+		self::$images = new Images();
 
 	}
 
@@ -42,12 +45,22 @@ final class APP {
 			switch ($_GET['sys']) {
 				case "report":
 					if (isset($_POST["postreport"])) {
-						self::$report->postReport();
+						APP::getReport()->postReport();
 					} else if (isset($_GET['data']) && $_GET['data'] != null) {
-						self::$report->get($_GET['data']);
+						APP::getReport()->get($_GET['data']);
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+					}
+					break;
+				case "image":
+					if (isset($_GET['data']) && $_GET['data'] != null) {
+						APP::getImages()->get($_GET['data']);
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					}
 					break;
 				default:
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					break;
 			}
 		} else {
@@ -65,5 +78,13 @@ final class APP {
 		$url .= ( $_SERVER["SERVER_PORT"] !== 80 ) ? ":".$_SERVER["SERVER_PORT"] : "";
 		$url .= $_SERVER["REQUEST_URI"];
 		return $url;
+	}
+	
+	public static function getReport() {
+		return self::$report;
+	}
+	
+	public static function getImages() {
+		return self::$images;
 	}
 }
