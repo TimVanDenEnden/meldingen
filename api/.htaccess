@@ -23,11 +23,6 @@ Options -Indexes
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	
+	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC]
 	RewriteRule ^([^/]+)/([^/]+) index.php?sys=$1&data=$2 [NC]
-    
-	#RewriteCond %{REQUEST_FILENAME} !-f
-	#RewriteCond %{REQUEST_FILENAME} !-d
-	#RewriteCond %{REQUEST_URI} !(includes/data/wiki) [NC]
-	##NORMAAL>>RewriteRule ^(.*)$ /index.php?page=$1 [L]
-	#RewriteRule ^(.*)$ /meldingen/index.php?page=$1 [L]
 </IfModule>
