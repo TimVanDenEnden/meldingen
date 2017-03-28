@@ -11,7 +11,7 @@ section.content {
 }
 
 .headerImage {
-    background: url(http://meldingen.azurewebsites.net/Content/banner.jpg);
+    background: url(../images/banner.png);
     height: 170px;
     background-size: cover;
     background-position: left center;
