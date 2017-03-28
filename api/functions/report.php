@@ -91,6 +91,37 @@ class Report {
 				echo json_encode($jsonArray);
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 				break;
+			case "pageblocks":
+				if (isset($_GET['category_id']) && $_GET['category_id'] != null) {
+
+					$sql = "SELECT * FROM "._DB_PREFIX."pageblocks WHERE category_id=?";
+
+					$statement = APP::getMysqli()->prepare($sql);
+
+					$statement->bind_param("i", $_GET['category_id']);
+
+					$statement->execute();
+
+					$result = $statement->get_result();
+
+					$jsonArray = array();
+					
+					while($row = $result->fetch_array()) {
+						array_push($jsonArray, array(
+							"id"	=> $row["id"],
+							"category_id"	=> $row["category_id"],
+							"title"	=> $row["title"],
+							"blockname"	=> $row["blockname"],
+							"data"	=> $row["data"]
+						));
+					}
+					
+					echo json_encode($jsonArray);
+					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
 			default:
 				header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		}

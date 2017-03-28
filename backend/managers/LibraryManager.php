@@ -32,7 +32,12 @@ class LibraryManager {
 	}
 	
 	public function getCategoryDetailsPage() {
-		$loader = new Loader(new MainTemplate());
+		$data = array(
+			"category_id" => isset($_REQUEST["category"]) ? $_REQUEST["category"] : 0
+		);
+
+		$loader = new Loader(new MainTemplate(), false, $data);
+
 		echo $this->renderPage("Details", $loader->load('details'));
 	}
 	

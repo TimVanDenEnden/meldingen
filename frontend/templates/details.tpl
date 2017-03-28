@@ -1,4 +1,4 @@
-﻿{{ dump(categories) }}
+﻿{{ dump(pageblocks) }}
 
 <div class="container p-sm-0">
 	<div class="headerImage"></div>

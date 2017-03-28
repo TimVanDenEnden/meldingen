@@ -144,6 +144,15 @@ class CreateTables {
 				timestamp TIMESTAMP
 			)
 		");
+
+		$this->create("
+			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."pageblocks (
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				category_id INT NOT NULL,
+				blockname TINYTEXT,
+				timestamp TIMESTAMP
+			)
+		");
 	}
 	
 	private function create($sql) {
