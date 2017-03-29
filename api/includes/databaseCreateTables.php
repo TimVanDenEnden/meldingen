@@ -149,7 +149,10 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."pageblocks (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				category_id INT NOT NULL,
+				title TINYTEXT,
 				blockname TINYTEXT,
+				data TINYTEXT,
+				required INT(1) DEFAULT '0',
 				timestamp TIMESTAMP
 			)
 		");
