@@ -112,6 +112,7 @@ class Report {
 							"category_id"	=> $row["category_id"],
 							"title"	=> $row["title"],
 							"blockname"	=> $row["blockname"],
+							"required"	=> $row["required"],
 							"data"	=> $row["data"]
 						));
 					}
