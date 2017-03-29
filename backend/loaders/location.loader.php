@@ -33,5 +33,14 @@ class Loader_Location extends LoaderExtend {
 		$json = json_decode($json, TRUE);
 		return $json;
 	}
+
+	private function run() {
+		$json_url = _API_URL."report/createreport";
+		$json = @file_get_contents($json_url);
+		$json = json_decode($json, TRUE);
+
+		setcookie("reportID", $json['report_id'], time() + 3600, "/");
+
+	}
 	
 }
