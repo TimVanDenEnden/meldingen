@@ -33,7 +33,8 @@ class LibraryManager {
 	
 	public function getCategoryDetailsPage() {
 		$data = array(
-			"category_id" => isset($_REQUEST["category"]) ? $_REQUEST["category"] : 0
+			"category_id" => isset($_REQUEST["category"]) ? $_REQUEST["category"] : 0,
+			"location_id" => isset($_REQUEST["location"]) ? $_REQUEST["location"] : 0
 		);
 
 		$loader = new Loader(new MainTemplate(), false, $data);

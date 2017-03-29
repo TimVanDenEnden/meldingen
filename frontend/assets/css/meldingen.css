@@ -100,6 +100,14 @@ section.content {
     color: #fff;
 }
 
+.padding0{
+    padding-bottom: 0px !important;
+}
+
+.fontsize18 {
+    font-size: 18px !important;
+}
+
 @media (max-width: 750px) {
 	.p-sm-0 {
     	padding-left: 0!important;

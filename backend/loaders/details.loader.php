@@ -8,7 +8,8 @@ class Loader_Details extends LoaderExtend {
 		return array(
 			"category_id"			=> parent::getLoaderData()['category_id'],
 			"categories"			=> $this->getCategories(),
-			"locations"				=> $this->getLocations(),
+			"location"				=> $this->getLocation(),
+			"location_id"			=> parent::getLoaderData()['location_id'],
 			"location_categories"	=> $this->getLocationCategories(),
 			"pageblocks"			=> $this->getPageBlocks()
 		);
@@ -21,11 +22,18 @@ class Loader_Details extends LoaderExtend {
 		return $json;
 	}
 	
-	private function getLocations() {
+	private function getLocation() {
 		$json_url = _API_URL."report/locations";
 		$json = @file_get_contents($json_url);
 		$json = json_decode($json, TRUE);
-		return $json;
+
+		foreach($json as $key => $value) { 
+			if ($key == parent::getLoaderData()['location_id']) {
+				return $value;
+			}
+		}
+
+		return null;
 	}
 	
 	private function getLocationCategories() {
