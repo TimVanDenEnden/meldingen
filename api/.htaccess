@@ -22,6 +22,7 @@ Options -Indexes
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	
+	RewriteRule ^report/createreport/([^/]+) index.php?sys=report&data=createreport&category_id=$1 [NC,QSA]
 	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,QSA]
 	RewriteRule ^([^/]+)/([^/]+) index.php?sys=$1&data=$2 [NC,QSA]
 	RewriteRule ^([^/]+) index.php?sys=$1 [NC,QSA]
