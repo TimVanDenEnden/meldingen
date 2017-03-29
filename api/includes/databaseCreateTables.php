@@ -72,7 +72,7 @@ class CreateTables {
 				color TINYTEXT NOT NULL,
 				additionalsfeatures TINYTEXT NOT NULL,
 				vehicletype_id INT NOT NULL,
-				report_id INT NOT NULL,
+				report_id TINYTEXT NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");
@@ -104,7 +104,7 @@ class CreateTables {
 				minage INT(100) NOT NULL,
 				maxage INT(100) NOT NULL,
 				uniqueproperties TINYTEXT NOT NULL,
-				report_id INT NOT NULL,
+				report_id TINYTEXT NOT NULL,
 				timestamp TIMESTAMP
 			)
 		");
@@ -112,6 +112,7 @@ class CreateTables {
 		$this->create("
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."reports (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				report_id TINYTEXT NOT NULL,
 				category_id INT NOT NULL,
 				isvisible INT(1) NOT NULL,
 				isdeleted INT(1) NOT NULL,

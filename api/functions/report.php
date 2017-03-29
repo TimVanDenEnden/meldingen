@@ -93,17 +93,12 @@ class Report {
 				break;
 			case "pageblocks":
 				if (isset($_GET['category_id']) && $_GET['category_id'] != null) {
-
 					$sql = "SELECT * FROM "._DB_PREFIX."pageblocks WHERE category_id=?";
-
 					$statement = APP::getMysqli()->prepare($sql);
-
 					$statement->bind_param("i", $_GET['category_id']);
-
 					$statement->execute();
 
 					$result = $statement->get_result();
-
 					$jsonArray = array();
 					
 					while($row = $result->fetch_array()) {
@@ -123,6 +118,38 @@ class Report {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
+			case "createreport":
+				if (isset($_GET['category_id']) && $_GET['category_id'] != null) {
+					$stmt = APP::getMysqli()->prepare("INSERT INTO "._DB_PREFIX."reports (
+						category_id,
+						isvisible,
+						isdeleted,
+						status,
+						created,
+						modified
+					) VALUES (?, ?, ?, ?, NOW(), NOW())");
+					$stmt->bind_param("iiiiss", 
+						$_GET['category_id'],
+						1,
+						0,
+						0
+					);
+					
+					if ($stmt->execute()) {
+						$insert_id = $stmt->insert_id;
+						$report_id = uniqid("report_{$insert_id}_");
+						
+						$stmt2 = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET report_id = ?");
+						$stmt2->bind_param("s", $report_id);
+						$stmt2->execute();
+						
+						echo json_encode(array("report_id" => $report_id));
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+					}
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
 			default:
 				header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		}
