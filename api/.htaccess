@@ -19,10 +19,10 @@ Options -Indexes
 	AddType     image/svg+xml svg svgz
 	AddEncoding gzip svgz
 </IfModule>
-# rewrite www.example.com ? example.com
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	
-	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,L]
-	RewriteRule ^([^/]+)/([^/]+) index.php?sys=$1&data=$2 [NC]
+	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,QSA]
+	RewriteRule ^([^/]+)/([^/]+) index.php?sys=$1&data=$2 [NC,QSA]
+	RewriteRule ^([^/]+) index.php?sys=$1 [NC,QSA]
 </IfModule>
