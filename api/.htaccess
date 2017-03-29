@@ -19,7 +19,6 @@ Options -Indexes
 	AddType     image/svg+xml svg svgz
 	AddEncoding gzip svgz
 </IfModule>
-# rewrite www.example.com ? example.com
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	
