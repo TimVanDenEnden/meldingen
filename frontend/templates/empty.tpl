@@ -15,6 +15,9 @@
     <!-- Bootstrap Core Css -->
     <link href="{{ SiteURL }}frontend/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
+        <!-- Jquery Core Js -->
+    <script src="{{ SiteURL }}frontend/assets/plugins/jquery/jquery.min.js"></script>
+
     <!-- Waves Effect Css -->
     <link href="{{ SiteURL }}frontend/assets/plugins/node-waves/waves.css" rel="stylesheet" />
 
@@ -36,6 +39,11 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ SiteURL }}frontend/assets/css/themes/all-themes.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.js"></script>
+
 </head>
 
 <body class="theme-red">
@@ -67,7 +75,6 @@
     <section class="content">
 		{{ CONTENT | raw }}
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $('.btn-toggle').click(function() {
             $(this).find('.btn').toggleClass('active');  
@@ -89,9 +96,6 @@
                
         });
     </script>
-
-    <!-- Jquery Core Js -->
-    <script src="{{ SiteURL }}frontend/assets/plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
     <script src="{{ SiteURL }}frontend/assets/plugins/bootstrap/js/bootstrap.js"></script>
