@@ -4,6 +4,16 @@ require_once _ROOT."/backend/loaders/loader.extend.php";
 
 class Loader_Location extends LoaderExtend {
 	
+	public function run() {
+		$category_id = isset($_REQUEST["category"]) ? $_REQUEST["category"] : 0;
+		$json_url = _API_URL."report/createreport/".$category_id;
+		$json = file_get_contents($json_url);
+		$json = json_decode($json, TRUE);
+
+		setcookie("reportID", $json['report_id'], time() + 3600, "/");
+
+	}
+	
 	public function getData() {
 		return array(
 			"category_id"			=> isset($_REQUEST["category"]) ? $_REQUEST["category"] : 0,
@@ -32,15 +42,6 @@ class Loader_Location extends LoaderExtend {
 		$json = @file_get_contents($json_url);
 		$json = json_decode($json, TRUE);
 		return $json;
-	}
-
-	private function run() {
-		$json_url = _API_URL."report/createreport";
-		$json = @file_get_contents($json_url);
-		$json = json_decode($json, TRUE);
-
-		setcookie("reportID", $json['report_id'], time() + 3600, "/");
-
 	}
 	
 }

@@ -9,7 +9,7 @@ class CreateTables {
 				category_id INT NOT NULL,
 				building TINYTEXT NOT NULL,
 				image_id INT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -17,7 +17,7 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."location_category (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -26,7 +26,7 @@ class CreateTables {
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
 				image_id INT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -34,7 +34,7 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."weapons (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -42,7 +42,7 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."drugsactions (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -52,7 +52,7 @@ class CreateTables {
 				name TINYTEXT NOT NULL,
 				phonenumber TINYTEXT NOT NULL,
 				emailadress TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -60,7 +60,7 @@ class CreateTables {
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."vehicletypes (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				name TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -73,7 +73,7 @@ class CreateTables {
 				additionalsfeatures TINYTEXT NOT NULL,
 				vehicletype_id INT NOT NULL,
 				report_id TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -105,7 +105,7 @@ class CreateTables {
 				maxage INT(100) NOT NULL,
 				uniqueproperties TINYTEXT NOT NULL,
 				report_id TINYTEXT NOT NULL,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 		
@@ -133,18 +133,29 @@ class CreateTables {
 				dateoftheft TIMESTAMP,
 				contact_id INT,
 				location_id INT,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 			)
 		");
 		
 		$this->create("
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."images (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				type TINYTEXT NOT NULL,
-				data LONGBLOB NOT NULL,
-				timestamp TIMESTAMP
+				image_id TINYTEXT NOT NULL,
+				path TINYTEXT NOT NULL,
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
+		
+		/* OLD
+		$this->create("
+			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."images (
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				type TINYTEXT NOT NULL,
+				data LONGBLOB NOT NULL,
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+			)
+		");
+		*/
 
 		$this->create("
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."pageblocks (
@@ -154,7 +165,7 @@ class CreateTables {
 				blockname TINYTEXT,
 				data TINYTEXT,
 				required INT(1) DEFAULT '0',
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			)
 		");
 	}

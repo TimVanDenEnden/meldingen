@@ -24,6 +24,14 @@ Options -Indexes
 	
 	RewriteRule ^report/createreport/([^/]+) index.php?sys=report&data=createreport&category_id=$1 [NC,QSA]
 	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,QSA]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	
 	RewriteRule ^([^/]+)/([^/]+) index.php?sys=$1&data=$2 [NC,QSA]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	
 	RewriteRule ^([^/]+) index.php?sys=$1 [NC,QSA]
 </IfModule>
