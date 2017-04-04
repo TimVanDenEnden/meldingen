@@ -1,6 +1,6 @@
 ﻿{% set category_name = '' %}
 {% for category in categories %}
-	{% if category.id == category_id %}
+	{% if category.id == category_id  %}
 		{% set category_name = category.name ~ ' - ' %}
 	{% endif %}
 {% endfor %}
