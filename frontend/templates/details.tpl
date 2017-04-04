@@ -323,6 +323,7 @@
 			                                       		<option value="{{ weapon.id }}">{{ weapon.name }}</option>
 			                                       	{% endfor %}
 			                                   </select>
+			                                   <div id="log2"></div>
 			                               </div>
 			                           </div>
 			                       </div>
@@ -462,4 +463,12 @@
             });
         });
     });
+</script>
+<script>
+    $( ":input" ).on( "click", function() {
+		input = $("select#weapontype_id").find("option:checked" ).html();
+  		if (input == 'Anders') {
+      		$( "#log2" ).html( "<input type'text'></input>" );
+		}
+	});
 </script>
