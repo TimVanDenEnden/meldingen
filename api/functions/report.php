@@ -173,6 +173,25 @@ class Report {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
+			case "test_getreports":
+				if (isset($_GET['report_id']) && $_GET['report_id'] != null) {
+					$sql = "SELECT * FROM "._DB_PREFIX."reports WHERE report_id=?";
+					$statement = APP::getMysqli()->prepare($sql);
+					$statement->bind_param("s", $_GET['report_id']);
+					$statement->execute();
+
+					$result = $statement->get_result();
+					
+					$array = array();
+					while($row = $result->fetch_assoc()) {
+						$array[] = $row;
+					}
+					echo json_encode($array);
+					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
 			default:
 				header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		}
@@ -205,6 +224,23 @@ class Report {
 				timestamp TIMESTAMP
 			*/
 			
+			$report_id			= $_POST["report_id"];
+			$description		= isset($_POST["description"]) 		? $_POST["description"] 	: null;
+			$moreinfo			= isset($_POST["moreinfo"]) 		? $_POST["moreinfo"] 		: null;
+			
+			$stmt = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET 
+				description = ?,
+				moreinfo = ?
+				WHERE report_id = ?"
+			);
+			$stmt->bind_param("sss", 
+				$description,
+				$moreinfo,
+				$report_id
+			);
+			$stmt->execute();
+			
+			/*
 			$category_id		= $_POST["category_id"];
 			$description		= isset($_POST["description"]) 		? $_POST["description"] 	: null;
 			$unconscious		= isset($_POST["unconscious"]) 		? $_POST["unconscious"] 	: null;
@@ -275,6 +311,7 @@ class Report {
 					
 				}
 			}
+			*/
 		}
 	}
 	
