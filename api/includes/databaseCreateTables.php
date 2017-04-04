@@ -147,8 +147,8 @@ class CreateTables {
 				isvisible INT(1) NOT NULL,
 				isdeleted INT(1) NOT NULL,
 				status INT(1) NOT NULL,
-				created TIMESTAMP,
-				modified TIMESTAMP,
+				created TIMESTAMP DEFAULT '0000-00-00 00:00:00',
+				modified TIMESTAMP DEFAULT '0000-00-00 00:00:00',
 				description MEDIUMTEXT,
 				moreinfo MEDIUMTEXT,
 				unconscious INT(1),
@@ -161,10 +161,10 @@ class CreateTables {
 				isweaponpresent INT(1),
 				drugsaction_id INT,
 				stolenobject MEDIUMTEXT,
-				dateoftheft TIMESTAMP,
+				dateoftheft TIMESTAMP DEFAULT '0000-00-00 00:00:00',
 				contact_id INT,
 				location_id INT,
-				timestamp TIMESTAMP
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 			)
 		");
 		

@@ -152,13 +152,34 @@ class Report {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
+			case "setreportlocation":
+				if (isset($_POST['report_id']) && $_POST['report_id'] != null) {
+					if (isset($_POST['location_id']) && $_POST['location_id'] != null) {
+						$report_id		= $_POST['report_id'];
+						$location_id	= $_POST['location_id'];
+						
+						$stmt = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET location_id = ? WHERE report_id = ?");
+						$stmt->bind_param("ss", $location_id, $report_id);
+						
+						if ($stmt->execute()) {
+							header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+						} else {
+							header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+						}
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+					}
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
 			default:
 				header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		}
 	}
 	
 	public function postReport() {
-		if (isset($_POST["postreport"], $_POST["category_id"])) {
+		if (isset($_POST["report_id"])) {
 			/*
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				category_id INT NOT NULL,

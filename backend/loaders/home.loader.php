@@ -4,6 +4,13 @@ require_once _ROOT."/backend/loaders/loader.extend.php";
 
 class Loader_Home extends LoaderExtend {
 	
+	public function run() {
+		if (isset($_COOKIE["reportID"])) {
+			unset($_COOKIE["reportID"]);
+			setcookie("reportID", null, -1, '/');
+		}
+	}
+	
 	public function getData() {
 		return array(
 			"categories" => $this->getCategories()
