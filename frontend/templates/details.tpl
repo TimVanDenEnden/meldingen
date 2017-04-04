@@ -23,7 +23,7 @@
 		                                <div class="col-sm-12 margin0">
 		                                    <div class="form-group margin0">
 		                                        <div class="form-line">
-		                                            <textarea rows="4" class="form-control no-resize" placeholder=""></textarea>
+		                                            <textarea rows="4" class="form-control no-resize" name="description" placeholder=""></textarea>
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -42,7 +42,7 @@
 		                                <div class="col-sm-12 margin0">
 		                                    <div class="form-group margin0">
 		                                        <div class="form-line">
-		                                            <textarea rows="4" class="form-control no-resize" placeholder=""></textarea>
+		                                            <textarea rows="4" class="form-control no-resize" name="moreinfo" placeholder=""></textarea>
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -61,7 +61,7 @@
 		                                <div class="col-sm-12 margin0">
 		                                    <div class="form-group margin0">
 		                                        <div class="form-line">
-		                                            <textarea rows="4" class="form-control no-resize" placeholder=""></textarea>
+		                                            <textarea rows="4" class="form-control no-resize" name="weaponlocation" placeholder=""></textarea>
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -80,7 +80,7 @@
 		                                <div class="col-sm-12 margin0">
 		                                    <div class="form-group margin0">
 		                                        <div class="form-line">
-		                                            <textarea rows="4" class="form-control no-resize" placeholder=""></textarea>
+		                                            <textarea rows="4" class="form-control no-resize" name="stolenobject" placeholder=""></textarea>
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -99,7 +99,7 @@
 		                                <div class="col-sm-12 margin0">
 		                                    <div class="form-group margin0">
 		                                        <div class="form-line">
-		                                            <textarea rows="4" class="form-control no-resize" placeholder=""></textarea>
+		                                            <textarea rows="4" class="form-control no-resize" name="victim" placeholder=""></textarea>
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -107,7 +107,7 @@
 		                        </div>
 		                    </div>
 		                </div>
-				{% elseif block.blockname == "UNCONSCIOUS" %}	
+				{% elseif block.blockname == "UNCONSCIOUS" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
 	                        <div class="header mldColor">
@@ -125,7 +125,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	
+	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
 	                        <div class="header mldColor">
@@ -161,19 +161,19 @@
 					                                <label for="email_address">Wat is u naam?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="email_address" class="form-control" placeholder="">
+					                                        <input type="text" id="email_address" name="contact_name" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                                <label for="password">Wat is uw telefoonnummer?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="password" id="password" class="form-control" placeholder="">
+					                                        <input type="text" id="password" name="contact_number" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                                <label for="password">Wat is uw e-mailadres?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="password" id="password" class="form-control" placeholder="">
+					                                        <input type="text" id="password" name="contact_email" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                        </div>
@@ -206,19 +206,19 @@
 					                                <label for="email_address">Wat is u naam?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="email_address" class="form-control" placeholder="">
+					                                        <input type="text" id="email_address" name="contact_name" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                                <label for="password">Wat is uw telefoonnummer?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="password" id="password" class="form-control" placeholder="">
+					                                        <input type="text" id="password" name="contact_number" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                                <label for="password">Wat is uw e-mailadres?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="password" id="password" class="form-control" placeholder="">
+					                                        <input type="text" id="password" name="contact_email" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                        </div>
@@ -230,7 +230,7 @@
 		                </div>
 		            <!-- #END# Example Tab -->
 		            {% endif %}
-		        {% elseif block.blockname == "IMAGES" %}
+		        {% elseif block.blockname == "IMAGES" %} <!-- Hoe gaan we deze oplossen nog!  -->
 			        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
 	                        <div class="header mldColor">
@@ -262,7 +262,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-	            {% elseif block.blockname == "VEHICLE" %}
+	            {% elseif block.blockname == "VEHICLE" %} <!-- Hoe gaan we deze oplossen nog!  -->
 			        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
 	                        <div class="header mldColor">
@@ -309,7 +309,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-		   		{% elseif block.blockname == "WEAPONTYPE_ID" %}
+		   		{% elseif block.blockname == "WEAPONTYPE_ID" %} <!-- Deze nog even testen !!!!!! -->
 			               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			                   <div class="card">
 			                       <div class="header mldColor">
@@ -318,7 +318,7 @@
 			                       <div class="body">
 			                           <div class="row clearfix">
 			                               <div class="col-sm-12 margin0">
-			                                   <select class="form-control show-tick">
+			                                   <select name="weapontype_id" class="form-control show-tick">
 			                                       <option value="">Klik hier om te ja of nee te kiezen</option>
 			                                       <option value="0">Ja</option>
 			                                       <option value="1">Nee</option>
@@ -328,7 +328,7 @@
 			                       </div>
 			                   </div>
 			               </div>
-			   	{% elseif block.blockname == "DRUGSACTION_ID" %}
+			   	{% elseif block.blockname == "DRUGSACTION_ID" %} <!-- Deze nog even testen !!!!!! -->
 			               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			                   <div class="card">
 			                       <div class="header mldColor">
@@ -337,7 +337,7 @@
 			                       <div class="body">
 			                           <div class="row clearfix">
 			                               <div class="col-sm-12 margin0">
-			                                   <select class="form-control show-tick">
+			                                   <select name="drugsaction_id" class="form-control show-tick">
 			                                       <option value="">Klik hier om te ja of nee te kiezen</option>
 			                                       <option value="0">Ja</option>
 			                                       <option value="1">Nee</option>
@@ -393,7 +393,7 @@
 	                                <div class="col-sm-12 margin0">
 	                                    <div class="form-group margin0">
 	                                        <div class="form-line">
-	                                            <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
+	                                            <input type="text" name="dateoftheft" class="datetimepicker form-control" placeholder="Please choose date & time...">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -412,7 +412,7 @@
 	                                <div class="col-sm-12 margin0">
 	                                    <div class="form-group margin0">
 	                                        <div class="form-line">
-	                                            <input type="number" class="form-control no-resize" value="2" placeholder="">
+	                                            <input type="number" name="fightercount" class="form-control no-resize" value="2" placeholder="">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -440,6 +440,8 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function(data) {
+                	console.log("Succes:");
+					console.log(data);
                     swal(
                         'Succesvol verzonden!',
                         'uw melding is verzonden!',
@@ -448,6 +450,8 @@
 
                 },
                 error: function(data) {
+                	console.log("Error:");
+                	console.log(data);
                     swal(
                         'Verzenden mislukt!',
                         'Er is iets mis gegaan met het verzenden van uw melding, probeer het later opnieuw.',
