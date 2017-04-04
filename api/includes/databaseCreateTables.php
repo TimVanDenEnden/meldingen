@@ -109,6 +109,7 @@ class CreateTables {
 			)
 		");
 		
+		/* OLD
 		$this->create("
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."reports (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -134,6 +135,36 @@ class CreateTables {
 				contact_id INT,
 				location_id INT,
 				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+			)
+		");
+		*/
+
+		$this->create("
+			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."reports (
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				report_id TINYTEXT NOT NULL,
+				category_id INT NOT NULL,
+				isvisible INT(1) NOT NULL,
+				isdeleted INT(1) NOT NULL,
+				status INT(1) NOT NULL,
+				created TIMESTAMP,
+				modified TIMESTAMP,
+				description MEDIUMTEXT,
+				moreinfo MEDIUMTEXT,
+				unconscious INT(1),
+				victim TINYTEXT,
+				victimname TINYTEXT,
+				weapontype_id INT,
+				weapontypeother TINYTEXT,
+				weaponlocation TINYTEXT,
+				fightercount INT,
+				isweaponpresent INT(1),
+				drugsaction_id INT,
+				stolenobject MEDIUMTEXT,
+				dateoftheft TIMESTAMP,
+				contact_id INT,
+				location_id INT,
+				timestamp TIMESTAMP
 			)
 		");
 		
