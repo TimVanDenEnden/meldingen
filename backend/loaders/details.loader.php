@@ -9,6 +9,8 @@ class Loader_Details extends LoaderExtend {
 			"category_id"			=> parent::getLoaderData()['category_id'],
 			"categories"			=> $this->getCategories(),
 			"location"				=> $this->getLocation(),
+			"weapons"				=> $this->getWeapons(),
+			"drugs_actions"			=> $this->getDrugsActions(),
 			"location_id"			=> parent::getLoaderData()['location_id'],
 			"location_categories"	=> $this->getLocationCategories(),
 			"pageblocks"			=> $this->getPageBlocks()
@@ -34,6 +36,20 @@ class Loader_Details extends LoaderExtend {
 		}
 
 		return null;
+	}
+
+	private function getWeapons() {
+		$json_url = _API_URL."report/weapons";
+		$json = @file_get_contents($json_url);
+		$json = json_decode($json, TRUE);
+		return $json;
+	}
+
+	private function getDrugsActions() {
+		$json_url = _API_URL."report/drugsactions";
+		$json = @file_get_contents($json_url);
+		$json = json_decode($json, TRUE);
+		return $json;
 	}
 	
 	private function getLocationCategories() {

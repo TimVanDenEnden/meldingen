@@ -319,9 +319,9 @@
 			                           <div class="row clearfix">
 			                               <div class="col-sm-12 margin0">
 			                                   <select name="weapontype_id" class="form-control show-tick">
-			                                       <option value="">Klik hier om te ja of nee te kiezen</option>
-			                                       <option value="0">Ja</option>
-			                                       <option value="1">Nee</option>
+			                                   		{% for weapon in weapons %}
+			                                       		<option value="{{ weapon.id }}">{{ weapon.name }}</option>
+			                                       	{% endfor %}
 			                                   </select>
 			                               </div>
 			                           </div>
@@ -338,9 +338,9 @@
 			                           <div class="row clearfix">
 			                               <div class="col-sm-12 margin0">
 			                                   <select name="drugsaction_id" class="form-control show-tick">
-			                                       <option value="">Klik hier om te ja of nee te kiezen</option>
-			                                       <option value="0">Ja</option>
-			                                       <option value="1">Nee</option>
+			                                   		{% for drugs_action in drugs_actions %}
+			                                       		<option value="{{ drugs_action.id }}">{{ drugs_action.name }}</option>
+			                                       	{% endfor %}
 			                                   </select>
 			                               </div>
 			                           </div>
