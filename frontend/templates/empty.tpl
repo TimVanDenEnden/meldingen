@@ -127,6 +127,6 @@
     <script src="{{ SiteURL }}frontend/assets/js/pages/forms/basic-form-elements.js"></script>
 
     <!-- Demo Js -->
-    <script src="{{ SiteURL }}frontend/assets/js/demo.js"></script>
+    <!--<script src="{{ SiteURL }}frontend/assets/js/demo.js"></script>-->
 </body>
 </html>

@@ -19,9 +19,21 @@ if(count($_FILES) > 0) {
 		
 		$target_dir		= _ROOT."/content/images/";
 		$file			= basename($_FILES["uploadImage"]["name"]);
-		$image_name		= getImageName(pathinfo($file, PATHINFO_FILENAME));
-		$path			= $_REQUEST["sys"]."/".date("Y")."/".date("m")."/".date("t");
-		$target_path	= $path."/".$image_name.".".pathinfo($file, PATHINFO_EXTENSION);
+		//$image_name		= getImageName(pathinfo($file, PATHINFO_FILENAME));
+		
+		$sys 			= $_REQUEST["sys"];
+		$year 			= date("Y");
+		$month 			= date("m");
+		$day 			= date("t");
+		$hour			= date("H");
+		$minutes		= date("i");
+		$seconds		= date("s");
+		$microseconds	= date("u");
+		
+		$path			= $sys."/".$year."/".$month."/".$day;
+		$image_id		= uniqid($year.$month.$day.$hour.$minutes.$seconds.$microseconds);
+		$image_path_id	= $sys."_".$year.$month.$day.$image_id."_".pathinfo($file, PATHINFO_EXTENSION);
+		$target_path	= $path."/".$image_id.".".pathinfo($file, PATHINFO_EXTENSION);
 		$target_file	= $target_dir.$target_path;
 		$imageFileType	= getimageSize($_FILES['uploadImage']['tmp_name'])[2];
 		
@@ -39,11 +51,7 @@ if(count($_FILES) > 0) {
 						if (move_uploaded_file($_FILES["uploadImage"]["tmp_name"], $target_file)) {
 							$image_id	= uniqid(date("YmtHisu"));
 							
-							$stmt = $mysqli->prepare("INSERT INTO "._DB_PREFIX."images (image_id, path) VALUES (?, ?)");
-							$stmt->bind_param("ss", $image_id, $target_path);
-							$stmt->execute();
-							
-							echo $image_id."<br><br>";
+							echo $image_path_id."<br><br>";
 							
 							header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 						} else {
