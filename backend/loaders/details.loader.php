@@ -4,6 +4,28 @@ require_once _ROOT."/backend/loaders/loader.extend.php";
 
 class Loader_Details extends LoaderExtend {
 	
+	public function run() {
+		$report_id = isset($_COOKIE["reportID"]) ? $_COOKIE["reportID"] : null;
+		$location_id = isset($_REQUEST["location"]) ? $_REQUEST["location"] : null;
+		
+		if ($report_id != null && $location_id != null) {
+			$curl = curl_init();
+			
+			curl_setopt_array($curl, array(
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_URL => _API_URL."report/setreportlocation",
+				CURLOPT_POST => 1,
+				CURLOPT_POSTFIELDS => array(
+					"report_id" => $report_id,
+					"location_id" => $location_id
+				)
+			));
+			
+			$resp = curl_exec($curl);
+			curl_close($curl);
+		}
+	}
+	
 	public function getData() {
 		return array(
 			"category_id"			=> parent::getLoaderData()['category_id'],
@@ -13,7 +35,8 @@ class Loader_Details extends LoaderExtend {
 			"drugs_actions"			=> $this->getDrugsActions(),
 			"location_id"			=> parent::getLoaderData()['location_id'],
 			"location_categories"	=> $this->getLocationCategories(),
-			"pageblocks"			=> $this->getPageBlocks()
+			"pageblocks"			=> $this->getPageBlocks(),
+			"report_id" 			=> isset($_COOKIE["reportID"]) ? $_COOKIE["reportID"] : null
 		);
 	}
 	

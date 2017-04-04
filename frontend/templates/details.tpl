@@ -423,6 +423,8 @@
 	                </div>
 				{% endif %}
 			{% endfor %}
+			
+			<input type="hidden" name="report_id" value="{{ report_id }}">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<button type="submit" name='postreport' class="btn btnSubmit btn-block btn-lg btn-default waves-effect fontsize18">Melding versturen</button>
 			</div>
@@ -431,7 +433,7 @@
 </div>
 
 <script>
-	$(document).ready(function() {        
+	$(document).ready(function() {   
         $("form#reportMelding").submit(function(){
             event.preventDefault();
             
@@ -462,6 +464,31 @@
                 }
             });
         });
+		
+		var auto_refresh = setInterval(
+			function () {			
+				updateForm();
+			}, 5000
+		);
+		$.ajaxSetup({ cache: true });
+		
+		var updateForm = function() {
+			$.ajax({
+                type: 'POST',
+                url: '{{ API_URL }}report/',
+                data: $("form#reportMelding").serialize(),
+                dataType: 'json',
+                success: function(data) {
+                	console.log("Succes:");
+					console.log(data);
+
+                },
+                error: function(data) {
+                	console.log("Error:");
+                	console.log(data);
+                }
+            });
+		};
     });
 </script>
 <script>
