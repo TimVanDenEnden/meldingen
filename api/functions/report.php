@@ -152,14 +152,15 @@ class Report {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
-			case "setreportlocation":
+			case "setreportlocation":				
 				if (isset($_POST['report_id']) && $_POST['report_id'] != null) {
 					if (isset($_POST['location_id']) && $_POST['location_id'] != null) {
+						
 						$report_id		= $_POST['report_id'];
 						$location_id	= $_POST['location_id'];
 						
 						$stmt = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET location_id = ? WHERE report_id = ?");
-						$stmt->bind_param("ss", $location_id, $report_id);
+						$stmt->bind_param("is", $location_id, $report_id);
 						
 						if ($stmt->execute()) {
 							header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
@@ -227,15 +228,24 @@ class Report {
 			$report_id			= $_POST["report_id"];
 			$description		= isset($_POST["description"]) 		? $_POST["description"] 	: null;
 			$moreinfo			= isset($_POST["moreinfo"]) 		? $_POST["moreinfo"] 		: null;
+			$fightercount		= isset($_POST["fightercount"]) 	? $_POST["fightercount"] 	: null;
+			$weapontype_id		= isset($_POST["weapontype_id"]) 	? $_POST["weapontype_id"] 	: null;
+			$weaponlocation		= isset($_POST["weaponlocation"]) 	? $_POST["weaponlocation"] 	: null;
 			
 			$stmt = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET 
 				description = ?,
-				moreinfo = ?
+				moreinfo = ?,
+				fightercount = ?,
+				weapontype_id = ?,
+				weaponlocation = ?
 				WHERE report_id = ?"
 			);
-			$stmt->bind_param("sss", 
+			$stmt->bind_param("sssisi", 
 				$description,
 				$moreinfo,
+				$fightercount,
+				$weapontype_id,
+				$weaponlocation,
 				$report_id
 			);
 			$stmt->execute();
