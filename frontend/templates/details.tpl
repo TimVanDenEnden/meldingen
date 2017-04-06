@@ -119,12 +119,26 @@
 	                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
 	                                        <button type="button" class="btn btn-info waves-effect locked_active">Ja</button>
 	                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
+	                                        <input type="hidden"  name="" id="jaNee" value="">
 	                                    </div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
+					<script>
+						$('#ja, #nee').click(function () {
+						    if (this.id == 'ja') {
+						        alert('ja clicked');
+										$("input#jaNee").val('1');
+						    }
+						    else if (this.id == 'nee') {
+						        alert('Nee clicked');
+										$("input#jaNee").val('0');
+						    }
+						    alert($('input#jaNee').val());
+						});
+					</script>
 	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
@@ -309,7 +323,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-		   		{% elseif block.blockname == "WEAPONTYPE_ID" %} <!-- Deze nog even testen !!!!!! -->
+		   		{% elseif block.blockname == "WEAPONTYPE_ID" %}
 			               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			                   <div class="card">
 			                       <div class="header mldColor">
@@ -318,17 +332,34 @@
 			                       <div class="body">
 			                           <div class="row clearfix">
 			                               <div class="col-sm-12 margin0">
-			                                   <select name="weapontype_id" class="form-control show-tick">
+			                                   <select id="weaponSelector" name="weapontype_id" class="form-control show-tick">
 			                                   		{% for weapon in weapons %}
 			                                       		<option value="{{ weapon.id }}">{{ weapon.name }}</option>
 			                                       	{% endfor %}
 			                                   </select>
-			                                   <div id="log2"></div>
+			                                   <div id="otherwaepon" style=" display: none;">
+													<br>
+													<div class='form-group margin0'>
+														<div class='form-line'>
+															<input type='text' name='weapontypeother' id='email_address' name='contact_name' class='form-control'>
+														</div>
+													</div>
+			                                   </div>
 			                               </div>
 			                           </div>
 			                       </div>
 			                   </div>
 			               </div>
+			      <script>
+					$('#weaponSelector').on('change', function() {        
+						var option = $(this).find('option:selected').text();
+						  if (option == "Anders") {
+						      $( "#otherwaepon" ).show();
+						  } else {
+						      $( "#otherwaepon" ).hide();
+						  }
+					})
+				</script>
 			   	{% elseif block.blockname == "DRUGSACTION_ID" %} <!-- Deze nog even testen !!!!!! -->
 			               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			                   <div class="card">
@@ -342,6 +373,7 @@
 			                                   		{% for drugs_action in drugs_actions %}
 			                                       		<option value="{{ drugs_action.id }}">{{ drugs_action.name }}</option>
 			                                       	{% endfor %}
+
 			                                   </select>
 			                               </div>
 			                           </div>
@@ -490,12 +522,4 @@
             });
 		};
     });
-</script>
-<script>
-    $( ":input" ).on( "click", function() {
-		input = $("select#weapontype_id").find("option:checked" ).html();
-  		if (input == 'Anders') {
-      		$( "#log2" ).html( "<input type'text'></input>" );
-		}
-	});
 </script>
