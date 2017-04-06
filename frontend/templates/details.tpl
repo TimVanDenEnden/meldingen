@@ -119,12 +119,26 @@
 	                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
 	                                        <button type="button" class="btn btn-info waves-effect locked_active">Ja</button>
 	                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
+	                                        <input type="hidden"  name="" id="jaNee" value="">
 	                                    </div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
+					<script>
+						$('#ja, #nee').click(function () {
+						    if (this.id == 'ja') {
+						        alert('ja clicked');
+										$("input#jaNee").val('1');
+						    }
+						    else if (this.id == 'nee') {
+						        alert('Nee clicked');
+										$("input#jaNee").val('0');
+						    }
+						    alert($('input#jaNee').val());
+						});
+					</script>
 	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
