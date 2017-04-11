@@ -129,12 +129,10 @@
 					<script>
 						$('#ja, #nee').click(function () {
 						    if (this.id == 'ja') {
-						        alert('ja clicked');
-										$("input#jaNee").val('1');
+								$("input#jaNee").val('1');
 						    }
 						    else if (this.id == 'nee') {
-						        alert('Nee clicked');
-										$("input#jaNee").val('0');
+								$("input#jaNee").val('0');
 						    }
 						    alert($('input#jaNee').val());
 						});
