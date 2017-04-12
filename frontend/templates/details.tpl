@@ -117,9 +117,9 @@
 	                            <div class="row clearfix">
 	                                <div class="col-sm-12 margin0">
 	                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
-	                                        <button type="button" class="btn btn-info waves-effect locked_active">Ja</button>
-	                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
-	                                        <input type="hidden"  name="" id="jaNee" value="">
+	                                        <button type="button" id='jaUNCONSCIOUS' class="btn btn-info waves-effect locked_active">Ja</button>
+	                                        <button type="button" id='neeUNCONSCIOUS' class="btn btn-default waves-effect unlocked_inactive">Nee</button>
+	                                        <input type="hidden"  name="unconscious" id="jaNeeUNCONSCIOUS" value="">
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -127,14 +127,13 @@
 	                    </div>
 	                </div>
 					<script>
-						$('#ja, #nee').click(function () {
+						$('#jaUNCONSCIOUS, #neeUNCONSCIOUS').click(function () {
 						    if (this.id == 'ja') {
-								$("input#jaNee").val('1');
+								$("input#jaNeeUNCONSCIOUS").val('1');
 						    }
 						    else if (this.id == 'nee') {
-								$("input#jaNee").val('0');
+								$("input#jaNeeUNCONSCIOUS").val('0');
 						    }
-						    alert($('input#jaNee').val());
 						});
 					</script>
 	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
@@ -147,14 +146,25 @@
 	                            <div class="row clearfix">
 	                                <div class="col-sm-12 margin0">
 	                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
-	                                        <button type="button" class="btn btn-info waves-effect locked_active">Ja</button>
-	                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
+	                                        <button type="button" id="jaISWEAPONPRESENT" class="btn btn-info waves-effect locked_active">Ja</button>
+	                                        <button type="button" id="neeISWEAPONPRESENT" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
+	                                        <input type="hidden"  name="unconscious" id="jaNeeISWEAPONPRESENT" value="">
 	                                    </div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
+	                <script>
+						$('#jaISWEAPONPRESENT, #neeISWEAPONPRESENT').click(function () {
+						    if (this.id == 'ja') {
+								$("input#jaNeeISWEAPONPRESENT").val('1');
+						    }
+						    else if (this.id == 'nee') {
+								$("input#jaNeeISWEAPONPRESENT").val('0');
+						    }
+						});
+					</script>
 				{% elseif block.blockname == "CONTACT" %}
 					{% if block.required == 1 %}
 					<!-- Example Tab -->
@@ -215,16 +225,16 @@
 		                                <div role="tabpanel" class="tab-pane fade in active" id="ja">
 		       
 						       				<div class="body padding0">
-					                                <label for="email_address">Wat is u naam?</label>
+					                                <label for="email_address">Wat is uw naam?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
 					                                        <input type="text" id="email_address" name="contact_name" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
-					                                <label for="password">Wat is uw telefoonnummer?</label>
+					                                <label for="number">Wat is uw telefoonnummer?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="password" name="contact_number" class="form-control" placeholder="">
+					                                        <input type="text" id="number" name="contact_number" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                                <label for="password">Wat is uw e-mailadres?</label>
@@ -268,6 +278,8 @@
 		                                        </table>
 		                                    </div>
 	                                        <button type="button" class="btn btnSubmit btn-block btn-lg btn-default waves-effect">Voeg afbeelding toe</button>
+<form id="upload-widget" method="post" action="/upload" class="dropzone">
+</form>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -339,7 +351,7 @@
 													<br>
 													<div class='form-group margin0'>
 														<div class='form-line'>
-															<input type='text' name='weapontypeother' id='email_address' name='contact_name' class='form-control'>
+															<input type='text' name='weapontypeother' id='email_address' class='form-control'>
 														</div>
 													</div>
 			                                   </div>
@@ -371,7 +383,6 @@
 			                                   		{% for drugs_action in drugs_actions %}
 			                                       		<option value="{{ drugs_action.id }}">{{ drugs_action.name }}</option>
 			                                       	{% endfor %}
-
 			                                   </select>
 			                               </div>
 			                           </div>
@@ -453,7 +464,6 @@
 	                </div>
 				{% endif %}
 			{% endfor %}
-			
 			<input type="hidden" name="report_id" value="{{ report_id }}">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<button type="submit" name='postreport' class="btn btnSubmit btn-block btn-lg btn-default waves-effect fontsize18">Melding versturen</button>
