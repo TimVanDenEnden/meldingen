@@ -116,27 +116,16 @@
 	                        <div class="body">
 	                            <div class="row clearfix">
 	                                <div class="col-sm-12 margin0">
-	                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
-	                                        <button type="button" class="btn btn-info waves-effect locked_active">Ja</button>
-	                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
-	                                        <input type="hidden"  name="" id="jaNee" value="">
+	                                    <div class="btn-group btn-toggle btn-group-justified jaNeeToggle" id="toggle_event_editing">
+	                                        <button type="button" class="btn btn-default waves-effect ja">Ja</button>
+	                                        <button type="button" class="btn btn-info waves-effect nee">Nee</button>
+	                                        <input type="hidden" name="unconscious" class="jaNee" value="0">
 	                                    </div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
-					<script>
-						$('#ja, #nee').click(function () {
-						    if (this.id == 'ja') {
-								$("input#jaNee").val('1');
-						    }
-						    else if (this.id == 'nee') {
-								$("input#jaNee").val('0');
-						    }
-						    alert($('input#jaNee').val());
-						});
-					</script>
 	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
@@ -146,9 +135,10 @@
 	                        <div class="body">
 	                            <div class="row clearfix">
 	                                <div class="col-sm-12 margin0">
-	                                    <div class="btn-group btn-toggle btn-group-justified" id="toggle_event_editing">
-	                                        <button type="button" class="btn btn-info waves-effect locked_active">Ja</button>
-	                                        <button type="button" class="btn btn-default waves-effect unlocked_inactive">Nee</button>
+	                                    <div class="btn-group btn-toggle btn-group-justified jaNeeToggle" id="toggle_event_editing">
+	                                        <button type="button" class="btn btn-default waves-effect ja">Ja</button>
+	                                        <button type="button" class="btn btn-info waves-effect nee">Nee</button>
+											<input type="hidden" name="isweaponpresent" class="jaNee" value="0">
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -170,22 +160,22 @@
 		                            <!-- Tab panes -->
 		                                <div role="tabpanel" class="tab-pane fade in active" id="ja">
 						       				<div class="body">
-					                                <label for="email_address">Wat is u naam?</label>
+					                                <label for="contact_name">Wat is u naam?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="email_address" name="contact_name" class="form-control" placeholder="">
+					                                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
-					                                <label for="password">Wat is uw telefoonnummer?</label>
+					                                <label for="contact_number">Wat is uw telefoonnummer?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="password" name="contact_number" class="form-control" placeholder="">
+					                                        <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
-					                                <label for="password">Wat is uw e-mailadres?</label>
+					                                <label for="contact_email">Wat is uw e-mailadres?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="password" name="contact_email" class="form-control" placeholder="">
+					                                        <input type="text" id="contact_email" name="contact_email" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                        </div>
@@ -215,22 +205,22 @@
 		                                <div role="tabpanel" class="tab-pane fade in active" id="ja">
 		       
 						       				<div class="body padding0">
-					                                <label for="email_address">Wat is u naam?</label>
+					                                <label for="contact_name">Wat is u naam?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="email_address" name="contact_name" class="form-control" placeholder="">
+					                                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
-					                                <label for="password">Wat is uw telefoonnummer?</label>
+					                                <label for="contact_number">Wat is uw telefoonnummer?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="password" name="contact_number" class="form-control" placeholder="">
+					                                        <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
-					                                <label for="password">Wat is uw e-mailadres?</label>
+					                                <label for="contact_email">Wat is uw e-mailadres?</label>
 					                                <div class="form-group">
 					                                    <div class="form-line">
-					                                        <input type="text" id="password" name="contact_email" class="form-control" placeholder="">
+					                                        <input type="text" id="contact_email" name="contact_email" class="form-control" placeholder="">
 					                                    </div>
 					                                </div>
 					                        </div>
@@ -339,7 +329,7 @@
 													<br>
 													<div class='form-group margin0'>
 														<div class='form-line'>
-															<input type='text' name='weapontypeother' id='email_address' name='contact_name' class='form-control'>
+															<input type='text' name='weapontypeother' id='email_address' class='form-control'>
 														</div>
 													</div>
 			                                   </div>
@@ -520,4 +510,14 @@
             });
 		};
     });
+</script>
+<script>
+	$('.jaNeeToggle .ja, .jaNeeToggle .nee').click(function () {
+		var jaNeeElement = $(this).parent().find('.jaNee');
+	    if (jaNeeElement.val() == "0") {
+			jaNeeElement.val("1");
+		} else if (jaNeeElement.val() == "1") {
+			jaNeeElement.val("0");
+		}
+	});
 </script>

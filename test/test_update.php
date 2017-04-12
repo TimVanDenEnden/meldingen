@@ -3,7 +3,30 @@
 <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.js"></script>
 <script src="https://use.fontawesome.com/46cd7bd22b.js"></script>
 
+<style>
+#UPDATE_report,
+#UPDATE_contact {
+	display: inline-block;
+	vertical-align: top;
+}
+#UPDATE_report table,
+#UPDATE_contact table {
+	background-color: #e8e8e8;
+}
+
+#UPDATE_contact {
+	margin-left: 20px;
+}
+</style>
+
+<p>
+Verwijderen:
+<br> - victimname
+</p>
+
 <div id="UPDATE_report">
+</div>
+<div id="UPDATE_contact">
 </div>
 
 <script type="text/javascript">
@@ -16,6 +39,7 @@ $(document).ready(function() {
 			$.getJSON("http://meldingen.dev/api/report/test_getreports&report_id=" + report_id, function(data) {
 				date = new Date;
 				var items = [];
+				items.push("<h3>Report</h3>");
 				items.push("<table>");
 				
 				$.each(data, function(key, val) {
@@ -24,6 +48,28 @@ $(document).ready(function() {
 						items.push("<td>" + key2 + "</td>");
 						items.push("<td>" + val2 + "</td>");
 						items.push("</tr>");
+						
+						if (key2 == "contact_id") {
+							$.getJSON("http://meldingen.dev/api/report/test_getcontact&contact_id=" + val2, function(data) {
+								date = new Date;
+								var items = [];
+								items.push("<h3>Contact</h3>");
+								items.push("<table>");
+								
+								$.each(data, function(key, val) {
+									$.each(val, function(key2, val2) {
+										items.push("<tr>");
+										items.push("<td>" + key2 + "</td>");
+										items.push("<td>" + val2 + "</td>");
+										items.push("</tr>");
+									});
+								});
+								
+								items.push("</table>");
+					
+								$("#UPDATE_contact").html(items.join( "" ));
+							});
+						}
 					});
 				});
 				

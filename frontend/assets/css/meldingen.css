@@ -50,6 +50,7 @@ section.content {
 	width: 60px;
 	max-width: 60px;
     display: block;
+	border-radius: 50%;
 }
 
 .h2Card {
