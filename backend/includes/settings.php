@@ -7,6 +7,8 @@
  * @author	Tim van den Enden <tim.vd_evden@me.com>
  *
  */
+ 
+set_time_limit (30);
 
 defined("_DB_HOST")				?: define("_DB_HOST",			"stijndevelopment.ga");
 defined("_DB_USER")				?: define("_DB_USER",			"API");
