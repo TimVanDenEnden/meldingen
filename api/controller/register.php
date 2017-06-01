@@ -1,10 +1,5 @@
 <?php
 
-/*
-	!!!!! IMPORTANT !!!!!
-	MYSQLI NORMAL TO PREPARED STATEMENT
-*/
-
 class Registration {
 
     private $db_connection = null;
