@@ -30,6 +30,9 @@ Options -Indexes
 	RewriteRule ^report/createreport/([^/]+) index.php?sys=report&data=createreport&category_id=$1 [NC,QSA]
 	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,QSA]
 	
+	#LOGIN FIX
+	RewriteRule ^login/(.*) index.php?sys=login&data=$1 [NC,B,QSA]
+	
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	

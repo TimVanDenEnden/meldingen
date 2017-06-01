@@ -42,14 +42,17 @@ final class APP {
 							break;
 						default:
 							if (APP::isLoggedIn()) {
-								/*
-								if (APP::getUserManager()->getPermission() > 0) {
+								//if (APP::getUserManager()->getPermission() > 0) {
 									switch ($_REQUEST['page']) {
 										case "login":
-											$this->library->getAdminLoginPage();
+											if (!APP::isLoggedIn()) {
+												APP::getLibraryManager()->getAdminLoginPage();
+											} else {
+												header("Location: "._PageURL."admin/dashboard");
+											}
 											break;
 										case "dashboard":
-											$this->library->getAdminDashboardPage();
+											APP::getLibraryManager()->getAdminDashboardPage();
 											break;
 										case "forms":
 											if (isset($_REQUEST['type']) && $_REQUEST['type'] != null) {
@@ -109,12 +112,11 @@ final class APP {
 										default:
 											$this->library->getAdminPageNotFound();
 									}
-								} else {
-									$this->library->getAdminNoPermissionPage();
-								}
-								*/
+								//} else {
+								//	$this->library->getAdminNoPermissionPage();
+								//}
 							} else {
-								$this->library->getAdminLoginPage();
+								APP::getLibraryManager()->getAdminLoginPage();
 							}
 					}
 				} else {
@@ -167,9 +169,17 @@ final class APP {
 	*/
 	
 	public static function isLoggedIn() {
-		$result = @file_get_contents(_API_URL."request_loggedin");
-		if ($result != null && $result != "") {
-			if ($result == true) {
+		$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
+		session_write_close();
+		
+		$ch = curl_init(_API_URL."request_loggedin"); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_COOKIE, $strCookie); 
+		$response = curl_exec($ch); 
+		curl_close($ch); 
+
+		if ($response != null && $response != "") {
+			if ($response == "true") {
 				return true;
 			}
 		}

@@ -23,6 +23,9 @@ Options -Indexes
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	
+	RewriteRule ^admin/([^/]+) index.php?sys=admin&page=$1 [NC]
+	RewriteRule ^admin index.php?sys=admin [NC]
+	
 	RewriteRule ^report/([^/]+)/([^/]+) index.php?category=$1&location=$2 [NC]
 	RewriteRule ^report/([^/]+) index.php?category=$1 [NC]
 </IfModule>

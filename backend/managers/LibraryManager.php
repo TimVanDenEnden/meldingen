@@ -4,7 +4,7 @@ class LibraryManager {
 	
 	public function __construct() {
 		require _ROOT."/backend/templates/MainTemplate.php";
-		//require _ROOT."/backend/templates/AdminTemplate.php";
+		require _ROOT."/backend/templates/AdminTemplate.php";
 		require _ROOT."/backend/loader.php";
     }
 	
@@ -76,6 +76,16 @@ class LibraryManager {
 	/********************
 		ADMIN TEMPLATES
 	********************/
+	
+	private function renderAdminPage($title, $content) {		
+		$loader = new Loader(new MainTemplate());
+		$data = array(
+			'title'		=> $title." | Admin | "._PageTitle,
+			'CONTENT'	=> $content,
+		);
+		echo $loader->load('empty', $data);
+	}
+	
 	/*
 	private function getDefaultAdminDataArray() {
 		return array(
@@ -106,14 +116,12 @@ class LibraryManager {
 		$data = array_merge($data, $this->getUserDataArray());
 		echo $loader->load('empty', $data);
 	}
-	
+	*/
 	public function getAdminDashboardPage() {
 		$loader = new Loader(new AdminTemplate(), true);
-		$data = $this->getDefaultAdminDataArray();
-		$data = array_merge($data, $this->getUserDataArray());
-		echo $this->renderAdminPage("Dashboard", $loader->load('dashboard', $data));
+		echo $this->renderAdminPage("Dashboard", $loader->load('dashboard'));
 	}
-	
+	/*
 	public function getAdminFormsPage($type) {
 		$loaderdata = array(
 			"type"	=> strtoupper($type)
@@ -235,13 +243,9 @@ class LibraryManager {
 		$data = array_merge($data, $this->getDefaultAdminDataArray());
 		echo $loader->load('error', $data);
 	}
-	
+	*/
 	public function getAdminLoginPage() {
 		$loader = new Loader(new AdminTemplate(), true);
-		$data = array(
-			'title'			=> "Login | Admin | "._PageTitle
-		);
-		echo $loader->load('login', $data);
+		echo $this->renderAdminPage("Login", $loader->load('login'));
 	}
-	*/
 }
