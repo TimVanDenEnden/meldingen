@@ -34,7 +34,6 @@ final class APP {
 
 	public function run() {		
 		if (isset($_REQUEST['sys']) && $_REQUEST['sys'] != null) {
-			/*
 			if ($_REQUEST['sys'] == "admin") {
 				if (isset($_REQUEST['page']) && $_REQUEST['page'] != null) {
 					switch ($_REQUEST['page']) {
@@ -42,7 +41,8 @@ final class APP {
 							echo APP::getDataManager()->getData();
 							break;
 						default:
-							if (APP::getLoginManager()->login_check()) {
+							if (APP::isLoggedIn()) {
+								/*
 								if (APP::getUserManager()->getPermission() > 0) {
 									switch ($_REQUEST['page']) {
 										case "login":
@@ -112,6 +112,7 @@ final class APP {
 								} else {
 									$this->library->getAdminNoPermissionPage();
 								}
+								*/
 							} else {
 								$this->library->getAdminLoginPage();
 							}
@@ -121,7 +122,6 @@ final class APP {
 					exit;
 				}
 			}
-			*/
 		} else if (isset($_REQUEST['category']) && $_REQUEST['category'] != null) {
 			if (isset($_REQUEST['location']) && $_REQUEST['location'] != null) {
 				APP::getLibraryManager()->getCategoryDetailsPage();
@@ -165,6 +165,16 @@ final class APP {
 		return self::$usermanager;
 	}
 	*/
+	
+	public static function isLoggedIn() {
+		$result = @file_get_contents(_API_URL."request_loggedin");
+		if ($result != null && $result != "") {
+			if ($result == true) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public static function getLibraryManager() {
 		return self::$librarymanager;

@@ -2,23 +2,31 @@
 
 class Login {
 
-	private $db_connection = null;
 	public $errors = array();
 	public $messages = array();
 	
 	public function __construct()
 	{
-		session_start();
-	
-		// check the possible login actions:
-		// if user tried to log out (happen when user clicks logout button)
+		
+	}
+
+	public function login() {
+		$this->reset();
+		if (isset($_POST["login"])) {
+			$this->dologinWithPostData();
+		}
+	}
+
+	public function logout() {
+		$this->reset();
 		if (isset($_GET["logout"])) {
 			$this->doLogout();
 		}
-		// login via post data (if user just submitted a login form)
-		elseif (isset($_POST["login"])) {
-			$this->dologinWithPostData();
-		}
+	}
+	
+	private function reset() {
+		$errors = array();
+		$messages = array();
 	}
 	
 	/**
@@ -29,8 +37,10 @@ class Login {
 		// check login form contents
 		if (empty($_POST['user_name'])) {
 			$this->errors[] = "Username field was empty.";
+			header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		} elseif (empty($_POST['user_password'])) {
 			$this->errors[] = "Password field was empty.";
+			header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		} elseif (!empty($_POST['user_name']) && !empty($_POST['user_password'])) {
 	
 			// change character set to utf8 and check it
@@ -74,15 +84,18 @@ class Login {
 						$_SESSION['user_name'] = $result_row->user_name;
 						$_SESSION['user_email'] = $result_row->user_email;
 						$_SESSION['user_login_status'] = 1;
-	
+						header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 					} else {
 						$this->errors[] = "Wrong password. Try again.";
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					}
 				} else {
 					$this->errors[] = "This user does not exist.";
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 			} else {
 				$this->errors[] = "Database connection problem.";
+				header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
 			}
 		}
 	}
@@ -97,7 +110,7 @@ class Login {
 		session_destroy();
 		// return a little feeedback message
 		$this->messages[] = "You have been logged out.";
-	
+		header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 	}
 	
 	/**

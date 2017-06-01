@@ -14,6 +14,8 @@ final class APP {
 	private static $mysqli;
 	private static $report;
 	private static $images;
+	private static $register;
+	private static $login;
 	
 	public function __construct() {
 		session_start();
@@ -23,6 +25,7 @@ final class APP {
 		require _ROOT."/functions/report.php";
 		require _ROOT."/functions/images.php";
 		require _ROOT."/controller/register.php";
+		require _ROOT."/controller/login.php";
 		
 		$this->database = new Database();
 		self::$mysqli = $this->database->getMysqli();
@@ -30,8 +33,10 @@ final class APP {
 			new CreateTables();
 		}
 
-		self::$report = new Report();
-		self::$images = new Images();
+		self::$report 	= new Report();
+		self::$images 	= new Images();
+		self::$register = new Registration();
+		self::$login 	= new Login();
 	}
 
 	public function run() {
@@ -60,11 +65,44 @@ final class APP {
 					}
 					break;
 				case "register":
-					$register = new Registration();
-					$return = array();
-					$return["errors"] = $register->errors;
-					$return["messages"] = $register->messages;
-					echo json_encode($return);
+					if (APP::getLogin()->isUserLoggedIn()) {
+						APP::getRegister()->register();
+						$return = array();
+						$return["errors"] = APP::getRegister()->errors;
+						$return["messages"] = APP::getRegister()->messages;
+						echo json_encode($return);
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+					}
+					break;
+				case "login":
+					if (!APP::getLogin()->isUserLoggedIn()) {
+						APP::getLogin()->login();
+						$return = array();
+						$return["errors"] = APP::getLogin()->errors;
+						$return["messages"] = APP::getLogin()->messages;
+						echo json_encode($return);
+					} else {
+						// already loggedin
+					}
+					break;
+				case "logout":
+					if (APP::getLogin()->isUserLoggedIn()) {
+						APP::getLogin()->logout();
+						$return = array();
+						$return["errors"] = APP::getLogin()->errors;
+						$return["messages"] = APP::getLogin()->messages;
+						echo json_encode($return);
+					} else {
+						// already loggedout
+					}
+					break;
+				case "request_loggedin":
+					if (APP::getLogin()->isUserLoggedIn()) {
+						return true;
+					} else {
+						return false;
+					}
 					break;
 				default:
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
@@ -93,5 +131,12 @@ final class APP {
 	
 	public static function getImages() {
 		return self::$images;
+	}
+	
+	public static function getRegister() {
+		return self::$register;
+	}
+	public static function getLogin() {
+		return self::$login;
 	}
 }
