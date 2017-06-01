@@ -73,16 +73,28 @@ class Registration {
                 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 
                 // check if user or email address already exists
-                $sql = "SELECT * FROM users WHERE user_name = '" . $user_name . "' OR user_email = '" . $user_email . "';";
-                $query_check_user_name = APP::getMysqli()->query($sql);
+                $sql = "SELECT * FROM users WHERE user_name = ? OR user_email = ?";
+
+                $stmt = APP::getMysqli()->prepare($sql);
+
+                /* bind parameters for markers */
+                $stmt->bind_param("ss", $user_name, $user_email);
+
+                $query_check_user_name = $stmt->execute();
 
                 if ($query_check_user_name->num_rows == 1) {
                     $this->errors[] = "Sorry, that username / email address is already taken.";
                 } else {
                     // write new user's data into database
                     $sql = "INSERT INTO users (user_name, user_password_hash, user_email)
-                            VALUES('" . $user_name . "', '" . $user_password_hash . "', '" . $user_email . "');";
-                    $query_new_user_insert = APP::getMysqli()->query($sql);
+                            VALUES(?, ?, ?);";
+
+                    $stmt = APP::getMysqli()->prepare($sql);
+
+                    /* bind parameters for markers */
+                    $stmt->bind_param("sss", $user_name, $user_password_hash, $user_email);
+                        
+                    $query_new_user_insert = $stmt->execute();
 
                     // if user has been added successfully
                     if ($query_new_user_insert) {

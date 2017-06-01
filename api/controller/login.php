@@ -1,10 +1,5 @@
 <?php
 
-/*
-	!!!!! IMPORTANT !!!!!
-	MYSQLI NORMAL TO PREPARED STATEMENT
-*/
-
 
 class Login {
 
@@ -54,9 +49,17 @@ class Login {
 				// username field)
 				$sql = "SELECT user_name, user_email, user_password_hash
 						FROM users
-						WHERE user_name = '" . $user_name . "' OR user_email = '" . $user_name . "';";
-				$result_of_login_check = APP::getMysqli()->query($sql);
-	
+						WHERE user_name = ? OR user_email = ?";
+
+
+				$stmt = APP::getMysqli()->prepare($sql);
+
+    			/* bind parameters for markers */
+    			$stmt->bind_param("ss", $user_name, $user_email);
+
+    			/* execute query */
+				$result_of_login_check = $stmt->execute();
+
 				// if this user exists
 				if ($result_of_login_check->num_rows == 1) {
 	
