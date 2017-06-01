@@ -55,9 +55,10 @@ class Login {
 
     			/* bind parameters for markers */
     			$stmt->bind_param("ss", $user_name, $user_email);
+    			$stmt->execute();
 
     			/* execute query */
-				$result_of_login_check = $stmt->execute();
+				$result_of_login_check = $stmt->get_result();
 
 				// if this user exists
 				if ($result_of_login_check->num_rows == 1) {
