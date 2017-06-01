@@ -97,12 +97,12 @@ class CreateTables {
 		$this->create("
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."perpetrators (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				perpetrator_id TINYTEXT NOT NULL,
 				name TINYTEXT NOT NULL,
 				sex INT(1) NOT NULL,
 				skincolor INT(1) NOT NULL,
 				clothing TINYTEXT NOT NULL,
-				minage INT(100) NOT NULL,
-				maxage INT(100) NOT NULL,
+				age INT(1) NOT NULL,
 				uniqueproperties TINYTEXT NOT NULL,
 				report_id TINYTEXT NOT NULL,
 				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP

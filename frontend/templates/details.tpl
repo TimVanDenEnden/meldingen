@@ -107,7 +107,7 @@
 		                        </div>
 		                    </div>
 		                </div>
-				{% elseif block.blockname == "UNCONSCIOUS" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
+				{% elseif block.blockname == "UNCONSCIOUS" %}
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
 	                        <div class="header mldColor">
@@ -126,7 +126,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-	            {% elseif block.blockname == "ISWEAPONPRESENT" %}	<!-- DEZE LATER EVEN NAAR KIJKEN! -->
+	            {% elseif block.blockname == "ISWEAPONPRESENT" %}
 	                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                    <div class="card">
 	                        <div class="header mldColor">
@@ -378,22 +378,13 @@
 	                                <div class="col-sm-12 margin0">
 	                                    <div class="form-group margin0">
 	                                        <div class="table-responsive">
-	                                            <table class="table ">
-	                                                <td style="vertical-align: middle;">Stijn</td>
-	                                                <td style="width: 50px;">
-	                                                    <button type="button" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float">
-	                                                        <i class="material-icons">mode_edit</i>
-	                                                    </button>
-	                                                </td>
-	                                                <td style="width: 50px;">
-	                                                    <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-	                                                        <i class="material-icons">delete</i>
-	                                                    </button>
-	                                                </td>
+	                                            <table class="table">
+													<tbody id="table_persons">
+														<!-- data inserted by script -->
+													</tbody>
 	                                            </table>
 	                                        </div>
-	                                        <button type="button" class="btn btnSubmit btn-block btn-lg btn-default waves-effect">Voeg persoon toe</button>
-	  
+	                                        <button type="button" class="btn btnSubmit btn-block btn-lg btn-default waves-effect" data-toggle="modal" data-target="#modal_AddPerson">Voeg persoon toe</button>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -405,7 +396,7 @@
 	                    <div class="card">
 	                        <div class="header mldColor">
 	                            <h2>
-	                                DATETIME PICKER
+	                                <h2>{{ block.title }}</h2>
 	                            </h2>
 	                        </div>
 	                        <div class="body">
@@ -450,8 +441,94 @@
     </div>
 </div>
 
+{% for block in pageblocks %}
+	{% if block.blockname == "PERSON" %}
+		<div class="modal fade" id="modal_AddPerson" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="largeModalLabel">Voeg een persoon toe</h4>
+					</div>
+					<form id="form_AddPerson" action="" method="">
+						<div class="modal-body">
+							
+								<h4>Hoe heet de persoon?</h4>
+								<div class="form-group">
+									<div class="form-line">
+										<input type="text" class="form-control" name="person_name" />
+									</div>
+								</div>
+								
+								<h4>Wat is het geslacht van de persoon?</h4>
+								<div class="form-group">
+									<div class="form-line">
+										<select name="person_sex" class="form-control show-tick">
+											<option value="0">Onbekend</option>
+											<option value="1">Man</option>
+											<option value="2">Vrouw</option>
+										</select>
+									</div>
+								</div>
+								
+								<h4>Welke huidskleur heeft de persoon?</h4>
+								<div class="form-group">
+									<div class="form-line">
+										<select name="person_skincolor" class="form-control show-tick">
+											<option value="0">Blank</option>
+											<option value="1">Licht getint</option>
+											<option value="2">Donker</option>
+										</select>
+									</div>
+								</div>
+								
+								<h4>Hoe oud is de persoon?</h4>
+								<div class="form-group">
+									<div class="form-line">
+										<select name="person_age" class="form-control show-tick">
+											<option value="0">Jonger dan 12</option>
+											<option value="1">Tussen 12 en 30</option>
+											<option value="2">Tussen 21 en 35</option>
+											<option value="3">Ouder dan 35</option>
+										</select>
+									</div>
+								</div>
+								
+								<h4>Wat voor kleding draagt de persoon?</h4>
+								<div class="form-group">
+									<div class="form-line">
+										<textarea rows="3" class="form-control no-resize auto-growth" name="person_clothing"></textarea>
+									</div>
+								</div>
+								
+								<h4>Heeft de persoon nog andere opvallende kenmerken?</h4>
+								<div class="form-group">
+									<div class="form-line">
+										<textarea rows="3" class="form-control no-resize auto-growth" name="person_uniqueproperties"></textarea>
+									</div>
+								</div>
+							
+						</div>
+						<div class="modal-footer">
+							<div class="row clearfix">
+								<div class="col-xs-6">
+									<button type="button" class="btn btn-block btn-lg bg-red waves-effect" data-dismiss="modal">SLUITEN</button>
+								</div>
+								<div class="col-xs-6">
+									<button type="button" id="postPerson" class="btn btn-block btn-lg btn-success waves-effect">OPSLAAN</button>
+								</div>
+							</div>
+						</div>
+						
+						<input type="hidden" name="person_report_id" value="{{ report_id }}">
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endfor %}
+
 <script>
-	$(document).ready(function() {   
+	$(document).ready(function() {
         $("form#reportMelding").submit(function(){
             event.preventDefault();
             
@@ -461,8 +538,11 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function(data) {
-                	console.log("Succes:");
-					console.log(data);
+					{% if DEBUG %}
+						console.log("Succes:");
+						console.log(data);
+					{% endif %}
+					
                     swal(
                         'Succesvol verzonden!',
                         'uw melding is verzonden!',
@@ -471,8 +551,11 @@
 
                 },
                 error: function(data) {
-                	console.log("Error:");
-                	console.log(data);
+					{% if DEBUG %}
+						console.log("Error:");
+						console.log(data);
+					{% endif %}
+					
                     swal(
                         'Verzenden mislukt!',
                         'Er is iets mis gegaan met het verzenden van uw melding, probeer het later opnieuw.',
@@ -497,18 +580,120 @@
                 data: $("form#reportMelding").serialize(),
                 dataType: 'json',
                 success: function(data) {
-                	console.log("Succes:");
-					console.log(data);
+					{% if DEBUG %}
+						console.log("Succes:");
+						console.log(data);
+					{% endif %}
 
                 },
                 error: function(data) {
-                	console.log("Error:");
-                	console.log(data);
+					{% if DEBUG %}
+						console.log("Error:");
+						console.log(data);
+					{% endif %}
                 }
             });
 		};
+		
+		$("#postPerson").click(function() {
+			$.ajax({
+                type: 'POST',
+                url: '{{ API_URL }}report/addPerpetrator',
+                data: $("form#form_AddPerson").serialize(),
+                dataType: 'json',
+                success: function(data) {
+					{% if DEBUG %}
+						console.log("Succes:");
+						console.log(data);
+					{% endif %}
+					
+					var htmldata = 
+						  '	<tr data-perpetrator_id="' + data.perpetrator_id + '">'
+						+ '		<td style="vertical-align: middle;">' + data.perpetrator_data.name + '</td>'
+						+ '		<td style="width: 50px;">'
+						+ '			<button type="button" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float">'
+						+ '				<i class="material-icons">mode_edit</i>'
+						+ '			</button>'
+						+ '		</td>'
+						+ '		<td style="width: 50px;">'
+						+ '			<button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">'
+						+ '				<i class="material-icons">delete</i>'
+						+ '			</button>'
+						+ '		</td>'
+						+ '	</tr>'
+					;
+					
+					$("#table_persons").append(htmldata);
+					
+					
+					$('#modal_AddPerson').modal('hide');
+					$('form#form_AddPerson')[0].reset();
+                },
+                error: function(data) {
+					{% if DEBUG %}
+						console.log("Error:");
+						console.log(data);
+					{% endif %}
+                }
+            });
+		});
     });
 </script>
+
+<script>
+	// Load all data
+	
+	$(document).ready(function() {
+		$.getJSON("{{ API_URL }}report/currentReport", function(data) {			
+			var form_AddPerson = $('form#reportMelding');
+			
+			console.log('%c Oh my heavens! ', 'color: #bada55');
+			
+			console.log("======= REPORT DATA =======");
+			console.log(data);
+			console.log("===== END REPORT DATA =====");
+			
+			form_AddPerson.find('input[name="fightercount"]')		.val( data.fightercount );
+			form_AddPerson.find('input[name="weapontype_id"]')		.val( data.weapontype_id );
+			form_AddPerson.find('input[name="weapontypeother"]')	.val( data.weapontypeother );
+			form_AddPerson.find('input[name="unconscious"]')		.val( data.unconscious );
+			form_AddPerson.find('input[name="isweaponpresent"]')	.val( data.isweaponpresent );
+			form_AddPerson.find('input[name="drugsaction_id"]')		.val( data.drugsaction_id );
+			form_AddPerson.find('input[name="dateoftheft"]')		.val( data.dateoftheft );
+			form_AddPerson.find('input[name="contact_name"]')		.val( data.contact_data.name );
+			form_AddPerson.find('input[name="contact_number"]')		.val( data.contact_data.phonenumber );
+			form_AddPerson.find('input[name="contact_email"]')		.val( data.contact_data.emailadress );
+			
+			form_AddPerson.find('textarea[name="description"]')		.text( data.description );
+			form_AddPerson.find('textarea[name="moreinfo"]')		.text( data.moreinfo );
+			form_AddPerson.find('textarea[name="weaponlocation"]')	.text( data.weaponlocation );
+			form_AddPerson.find('textarea[name="victim"]')			.text( data.victim );
+			form_AddPerson.find('textarea[name="stolenobject"]')	.text( data.stolenobject );
+			
+			var items = [];
+			$.each(data.perpetrators, function(key, val) {
+				var htmldata = 
+					  '	<tr data-perpetrator_id="' + val.perpetrator_id + '">'
+					+ '		<td style="vertical-align: middle;">' + val.perpetrator_data.name + '</td>'
+					+ '		<td style="width: 50px;">'
+					+ '			<button type="button" class="btn bg-light-green btn-circle waves-effect waves-circle waves-float">'
+					+ '				<i class="material-icons">mode_edit</i>'
+					+ '			</button>'
+					+ '		</td>'
+					+ '		<td style="width: 50px;">'
+					+ '			<button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">'
+					+ '				<i class="material-icons">delete</i>'
+					+ '			</button>'
+					+ '		</td>'
+					+ '	</tr>'
+				;
+				
+				$("#table_persons").append(htmldata);
+			});
+		});
+	});
+</script>
+
 <script>
 	$('.jaNeeToggle .ja, .jaNeeToggle .nee').click(function () {
 		var jaNeeElement = $(this).parent().find('.jaNee');

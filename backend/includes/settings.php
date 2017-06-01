@@ -22,6 +22,7 @@ defined("_PageTitle") 			?: define("_PageTitle",			"Meldingen");
 defined("_API_URL") 			?: define("_API_URL",			"http://meldingen.dev/api/");
 
 defined("_ShowErrors") 			?: define("_ShowErrors",		true);
+defined("_DEBUG") 				?: define("_DEBUG",				true);
 
 /***********************************
 	DO NOT EDIT THE LINES BELOW!

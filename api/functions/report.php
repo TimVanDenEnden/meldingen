@@ -152,7 +152,7 @@ class Report {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
-			case "setreportlocation":				
+			case "setreportlocation":
 				if (isset($_POST['report_id']) && $_POST['report_id'] != null) {
 					if (isset($_POST['location_id']) && $_POST['location_id'] != null) {
 						
@@ -171,7 +171,7 @@ class Report {
 						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					}
 				} else {
-					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+					header($_SERVER["SERVER_PROTOCOL"]." 404 Forbidden");
 				}
 				break;
 			case "currentReport":
@@ -184,7 +184,7 @@ class Report {
 					$result = $statement->get_result();
 					
 					$jsonArray = array();
-					while($row = $result->fetch_assoc()) {
+					if ($row = $result->fetch_assoc()) {
 						$jsonArray["id"] 				= $row["id"];
 						$jsonArray["report_id"] 		= $row["report_id"];
 						$jsonArray["category_id"] 		= $row["category_id"];
@@ -203,6 +203,54 @@ class Report {
 						$jsonArray["dateoftheft"] 		= $row["dateoftheft"];
 						$jsonArray["contact_id"] 		= $row["contact_id"];
 						$jsonArray["location_id"] 		= $row["location_id"];
+						
+						/*
+						*	Contact data
+						*/
+						
+						$jsonArray["contact_data"] 		= array();
+						
+						if (isset($row["contact_id"]) && $row["contact_id"] != null) {
+							$sql2 = "SELECT * FROM "._DB_PREFIX."contacts WHERE id=?";
+							$statement2 = APP::getMysqli()->prepare($sql2);
+							$statement2->bind_param("i", $row["contact_id"]);
+							$statement2->execute();
+							$result2 = $statement2->get_result();
+							
+							if ($row2 = $result2->fetch_assoc()) {
+								$jsonArray["contact_data"]["id"] 			= $row2["id"];
+								$jsonArray["contact_data"]["name"] 			= $row2["name"];
+								$jsonArray["contact_data"]["phonenumber"] 	= $row2["phonenumber"];
+								$jsonArray["contact_data"]["emailadress"] 	= $row2["emailadress"];
+							}
+						}
+						
+						/*
+						*	Perpetrators data
+						*/
+						
+						$jsonArray["perpetrators"] 		= array();
+						
+						$sql3 = "SELECT * FROM "._DB_PREFIX."perpetrators WHERE report_id=?";
+						$statement3 = APP::getMysqli()->prepare($sql3);
+						$statement3->bind_param("s", $row["report_id"]);
+						$statement3->execute();
+						$result3 = $statement3->get_result();
+						
+						while ($row3 = $result3->fetch_assoc()) {
+							$jsonArray["perpetrators"][$row3["perpetrator_id"]] = array(
+								"perpetrator_id" 	=> $row3["perpetrator_id"],
+								"perpetrator_data"	=> array (
+									"name"				=> $row3["name"],
+									"sex"				=> $row3["sex"],
+									"skincolor"			=> $row3["skincolor"],
+									"clothing"			=> $row3["clothing"],
+									"age"				=> $row3["age"],
+									"uniqueproperties"	=> $row3["uniqueproperties"],
+									"report_id"			=> $row3["report_id"]
+								)
+							);
+						}
 					}
 					
 					echo json_encode($jsonArray);
@@ -249,6 +297,75 @@ class Report {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
+			case "test_getpersons":
+				if (isset($_GET['report_id']) && $_GET['report_id'] != null) {
+					$sql = "SELECT * FROM "._DB_PREFIX."perpetrators WHERE report_id=?";
+					$statement = APP::getMysqli()->prepare($sql);
+					$statement->bind_param("s", $_GET['report_id']);
+					$statement->execute();
+
+					$result = $statement->get_result();
+					
+					$array = array();
+					while($row = $result->fetch_assoc()) {
+						$array[] = $row;
+					}
+					echo json_encode($array);
+					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
+			case "addPerpetrator":
+				if (isset($_POST['person_report_id']) && $_POST['person_report_id'] != null) {
+					
+					$report_id			= $_POST["person_report_id"];
+					$person_name		= isset($_POST["person_name"]) 				? $_POST["person_name"] 			: null;
+					$person_sex			= isset($_POST["person_sex"]) 				? $_POST["person_sex"] 				: null;
+					$person_skincolor	= isset($_POST["person_skincolor"]) 		? $_POST["person_skincolor"]		: null;
+					$person_age			= isset($_POST["person_age"]) 				? $_POST["person_age"] 				: null;
+					$person_clothing	= isset($_POST["person_clothing"]) 			? $_POST["person_clothing"] 		: null;
+					$person_uniqueprop	= isset($_POST["person_uniqueproperties"]) 	? $_POST["person_uniqueproperties"] : null;
+					
+					$stmt = APP::getMysqli()->prepare("INSERT INTO "._DB_PREFIX."perpetrators (
+						name,
+						sex,
+						skincolor,
+						clothing,
+						age,
+						uniqueproperties,
+						report_id
+					) VALUES (?, ?, ?, ?, ?, ?, ?)");
+					$stmt->bind_param("siisiss", $person_name, $person_sex, $person_skincolor, $person_clothing, $person_age, $person_uniqueprop, $report_id);
+					
+					if ($stmt->execute()) {
+						$insert_id 		= $stmt->insert_id;
+						$perpetrator_id = uniqid("perpetrator_{$insert_id}_");
+						
+						$stmt2 = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."perpetrators SET perpetrator_id = ? WHERE id = ?");
+						$stmt2->bind_param("si", $perpetrator_id, $insert_id);
+						$stmt2->execute();
+						
+						echo json_encode(array(
+							"perpetrator_id" 	=> $perpetrator_id,
+							"perpetrator_data"	=> array (
+								"name"				=> $person_name,
+								"sex"				=> $person_sex,
+								"skincolor"			=> $person_skincolor,
+								"clothing"			=> $person_clothing,
+								"age"				=> $person_age,
+								"uniqueproperties"	=> $person_uniqueprop,
+								"report_id"			=> $report_id
+							)
+						));
+						header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+					}
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
 			default:
 				header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		}
@@ -290,6 +407,16 @@ class Report {
 			$weapontypeother	= isset($_POST["weapontypeother"]) 	? $_POST["weapontypeother"] : null;
 			$victim				= isset($_POST["victim"]) 			? $_POST["victim"] 			: null;
 			$unconscious		= isset($_POST["unconscious"]) 		? $_POST["unconscious"] 	: null;
+			$isweaponpresent	= isset($_POST["isweaponpresent"]) 	? $_POST["isweaponpresent"] : null;
+			$drugsaction_id		= isset($_POST["drugsaction_id"]) 	? $_POST["drugsaction_id"] 	: null;
+			$stolenobject		= isset($_POST["stolenobject"]) 	? $_POST["stolenobject"] 	: null;
+			
+			$dateoftheft		= isset($_POST["dateoftheft"]) 		? $_POST["dateoftheft"]		: null;
+			if ($dateoftheft != null) {
+				$dateoftheft = DateTime::createFromFormat('l d F Y - H:i', $dateoftheft);
+				$dateoftheft = $dateoftheft->format('Y-m-d H:i:s');			
+			}
+			//dddd DD MMMM YYYY - HH:mm
 			
 			$stmt = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET 
 				description = ?,
@@ -299,10 +426,14 @@ class Report {
 				weaponlocation = ?,
 				weapontypeother = ?,
 				victim = ?,
-				unconscious = ?
+				unconscious = ?,
+				isweaponpresent = ?,
+				drugsaction_id = ?,
+				dateoftheft = ?,
+				stolenobject = ?
 				WHERE report_id = ?"
 			);
-			$stmt->bind_param("sssisssss", 
+			$stmt->bind_param("sssisssssssss", 
 				$description,
 				$moreinfo,
 				$fightercount,
@@ -311,6 +442,10 @@ class Report {
 				$weapontypeother,
 				$victim,
 				$unconscious,
+				$isweaponpresent,
+				$drugsaction_id,
+				$dateoftheft,
+				$stolenobject,
 				$report_id
 			);
 			if (!$stmt->execute()) {
@@ -352,6 +487,9 @@ class Report {
 					}
 				}
 			}
+			
+			echo json_encode(array("UPDATE SUCCESS"));
+			header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 			
 			/*
 			$category_id		= $_POST["category_id"];

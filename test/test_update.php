@@ -4,17 +4,22 @@
 <script src="https://use.fontawesome.com/46cd7bd22b.js"></script>
 
 <style>
-#UPDATE_report,
-#UPDATE_contact {
+.UPDATE {
 	display: inline-block;
 	vertical-align: top;
 }
-#UPDATE_report table,
-#UPDATE_contact table {
+.UPDATE table {
+	border-collapse: collapse;
+}
+.UPDATE table tr {
 	background-color: #e8e8e8;
 }
+.UPDATE table tr.white {
+	background-color: white;
+	height: 20px;
+}
 
-#UPDATE_contact {
+.m-l-20 {
 	margin-left: 20px;
 }
 </style>
@@ -24,9 +29,11 @@ Verwijderen:
 <br> - victimname
 </p>
 
-<div id="UPDATE_report">
+<div id="UPDATE_report" class="UPDATE">
 </div>
-<div id="UPDATE_contact">
+<div id="UPDATE_contact" class="UPDATE m-l-20">
+</div>
+<div id="UPDATE_persons" class="UPDATE m-l-20 white">
 </div>
 
 <script type="text/javascript">
@@ -76,6 +83,32 @@ $(document).ready(function() {
 				items.push("</table>");
 	
 				$("#UPDATE_report").html(items.join( "" ));
+			});
+			
+			$.getJSON("http://meldingen.dev/api/report/test_getpersons&report_id=" + report_id, function(data) {
+				date = new Date;
+				var items = [];
+				items.push("<h3>Perpetrators</h3>");
+				items.push("<table>");
+				
+				console.log(data);
+				
+				$.each(data, function(key, val) {
+					items.push("<tr>");
+					items.push("<td><h3>#" + val.id + "</h3></td>");
+					items.push("</tr>");
+					$.each(val, function(key2, val2) {
+						items.push("<tr>");
+						items.push("<td>" + key2 + "</td>");
+						items.push("<td>" + val2 + "</td>");
+						items.push("</tr>");
+					});
+					items.push("<tr class='white'> </tr>");
+				});
+				
+				items.push("</table>");
+	
+				$("#UPDATE_persons").html(items.join( "" ));
 			});
 		}, 2000
 	);
