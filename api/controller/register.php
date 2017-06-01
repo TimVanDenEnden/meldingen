@@ -68,21 +68,21 @@ class Registration {
                 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 
                 // check if user or email address already exists
-                $sql = "SELECT * FROM users WHERE user_name = ? OR user_email = ?";
+                $sql = "SELECT * FROM "._DB_PREFIX."login_users WHERE user_name = ? OR user_email = ?";
 
                 $stmt = APP::getMysqli()->prepare($sql);
 
                 /* bind parameters for markers */
                 $stmt->bind_param("ss", $user_name, $user_email);
+				$stmt->execute();
 
-                $query_check_user_name = $stmt->execute();
+                $query_check_user_name = $stmt->get_result();
 
                 if ($query_check_user_name->num_rows == 1) {
                     $this->errors[] = "Sorry, that username / email address is already taken.";
                 } else {
                     // write new user's data into database
-                    $sql = "INSERT INTO users (user_name, user_password_hash, user_email)
-                            VALUES(?, ?, ?);";
+                    $sql = "INSERT INTO "._DB_PREFIX."login_users (user_name, user_password_hash, user_email) VALUES(?, ?, ?);";
 
                     $stmt = APP::getMysqli()->prepare($sql);
 

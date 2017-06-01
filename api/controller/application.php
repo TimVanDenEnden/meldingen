@@ -22,6 +22,7 @@ final class APP {
 		require _ROOT."/includes/databaseCreateTables.php";
 		require _ROOT."/functions/report.php";
 		require _ROOT."/functions/images.php";
+		require _ROOT."/controller/register.php";
 		
 		$this->database = new Database();
 		self::$mysqli = $this->database->getMysqli();
@@ -31,7 +32,6 @@ final class APP {
 
 		self::$report = new Report();
 		self::$images = new Images();
-
 	}
 
 	public function run() {
@@ -58,6 +58,13 @@ final class APP {
 					} else {
 						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					}
+					break;
+				case "register":
+					$register = new Registration();
+					$return = array();
+					$return["errors"] = $register->errors;
+					$return["messages"] = $register->messages;
+					echo json_encode($return);
 					break;
 				default:
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
