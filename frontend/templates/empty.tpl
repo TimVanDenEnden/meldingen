@@ -33,6 +33,9 @@
     <!-- Animation Css -->
     <link href="{{ SiteURL }}frontend/assets/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Dropzone Css -->
+    <link href="{{ SiteURL }}frontend/assets/plugins/dropzone/dropzone.css" rel="stylesheet">
+
     <!-- Custom Css -->
     <link href="{{ SiteURL }}frontend/assets/css/style.css" rel="stylesheet">
     <link href="{{ SiteURL }}frontend/assets/css/meldingen.css" rel="stylesheet">
@@ -124,6 +127,9 @@
 
     <!-- Bootstrap Material Datetime Picker Plugin Js -->
     <script src="{{ SiteURL }}frontend/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+        <!-- Dropzone Plugin Js -->
+    <script src="{{ SiteURL }}frontend/assets/plugins/dropzone/dropzone.js"></script>
 
     <!-- Custom Js -->
     <script src="{{ SiteURL }}frontend/assets/js/admin.js"></script>
