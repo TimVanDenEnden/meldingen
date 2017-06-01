@@ -44,10 +44,10 @@ final class APP {
 		if (isset($_GET['sys']) && $_GET['sys'] != null) {
 			switch ($_GET['sys']) {
 				case "report":
-					if (isset($_POST["report_id"])) {
-						APP::getReport()->postReport();
-					} else if (isset($_GET['data']) && $_GET['data'] != null) {
+					if (isset($_GET['data']) && $_GET['data'] != null) {
 						APP::getReport()->get($_GET['data']);
+					} else if (isset($_POST["report_id"])) {
+						APP::getReport()->postReport();
 					} else {
 						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					}

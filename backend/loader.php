@@ -42,7 +42,8 @@ class Loader {
 		$data = array_merge($data, array(
 			'SiteURL'	=> _SiteURL,
 			'PageURL'	=> _PageURL,
-			'API_URL'	=> _API_URL
+			'API_URL'	=> _API_URL,
+			'DEBUG'		=> _DEBUG
 		));
 		$data = array_merge($data, $extraData);
  
