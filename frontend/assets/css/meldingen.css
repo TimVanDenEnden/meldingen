@@ -1,3 +1,11 @@
+.nav-tabs > li > a:before {
+    border-bottom: 2px solid #00B0E4 !important;
+}
+
+.loginLine:after {
+    border-bottom: 2px solid #00B0E4 !important;
+}
+
 section.content {
 	margin: 0px auto !important;
 }
@@ -72,7 +80,7 @@ section.content {
 }
 
 .form-group .form-line:after {
-    border-bottom: 2px solid #111133;
+    border-bottom: 2px solid #00B0E4 !important;
 }
 
 .btn-group-justified .btn{
@@ -80,7 +88,7 @@ section.content {
 }
 
 .btn-info, .btn-info:hover, .btn-info:active, .btn-info:focus {
-    background: #111133 !important;
+ /*   background: #111133 !important;*/
 }
 
 .dtp > .dtp-content > .dtp-date-view > header.dtp-header {
@@ -97,7 +105,7 @@ section.content {
 
 .btnSubmit {
     margin-bottom: 20px;
-    background: #111133 !important;
+    background: #00B0E4 !important;
     color: #fff;
 }
 
