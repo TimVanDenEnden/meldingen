@@ -17,8 +17,9 @@ class Report {
 				}
 				
 				
-				echo json_encode($jsonArray);
+				header('Content-Type: application/json');
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				break;
 			case "location_categories":
 				$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."location_category");
@@ -32,8 +33,9 @@ class Report {
 				}
 				
 				
-				echo json_encode($jsonArray);
+				header('Content-Type: application/json');
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				break;
 			case "locations":
 				$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."locations");
@@ -48,8 +50,9 @@ class Report {
 					));
 				}
 				
-				echo json_encode($jsonArray);
+				header('Content-Type: application/json');
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				break;
 			case "weapons":
 				$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."weapons");
@@ -62,8 +65,9 @@ class Report {
 					));
 				}
 				
-				echo json_encode($jsonArray);
+				header('Content-Type: application/json');
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				break;
 			case "drugsactions":
 				$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."drugsactions");
@@ -76,9 +80,9 @@ class Report {
 					));
 				}
 				
-				
-				echo json_encode($jsonArray);
+				header('Content-Type: application/json');
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				break;
 			case "vehicletypes":
 				$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."vehicletypes");
@@ -91,9 +95,9 @@ class Report {
 					));
 				}
 				
-				
-				echo json_encode($jsonArray);
+				header('Content-Type: application/json');
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				break;
 			case "pageblocks":
 				if (isset($_GET['category_id']) && $_GET['category_id'] != null) {
@@ -116,9 +120,9 @@ class Report {
 						));
 					}
 					
-					
-					echo json_encode($jsonArray);
-					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				header('Content-Type: application/json');
+				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+				echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				} else {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
@@ -137,7 +141,7 @@ class Report {
 						status,
 						created,
 						modified
-					) VALUES (?, ?, ?, ?, NOW(), NOW())");
+					) VALUES (?, ?, ?, ?, CONVERT_TZ(NOW(), 'UTC', 'Europe/Amsterdam'), CONVERT_TZ(NOW(), 'UTC', 'Europe/Amsterdam'))");
 					$stmt->bind_param("iiii", $category_id, $isvisible, $isdeleted, $status);
 					
 					if ($stmt->execute()) {
@@ -259,8 +263,9 @@ class Report {
 						}
 					}
 					
-					echo json_encode($jsonArray);
+					header('Content-Type: application/json');
 					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+					echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				} else {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}

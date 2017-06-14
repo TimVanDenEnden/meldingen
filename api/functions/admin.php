@@ -21,32 +21,40 @@ class Admin {
 				break;
 			case "recentReports":
 				if (APP::getLogin()->isUserLoggedIn()) {
-					$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."reports WHERE status <= 1");
+					$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."reports WHERE status <= 1 ORDER BY created DESC");
 					
 					$target_date = date('Y-m-d', strtotime('-1 day'));
-					$sql = "SELECT * FROM "._DB_PREFIX."reports WHERE status='2' AND DATE(modified) >= ?";
+					$sql = "SELECT * FROM "._DB_PREFIX."reports WHERE status='2' AND DATE(modified) >= ? ORDER BY created DESC";
 					$statement = APP::getMysqli()->prepare($sql);
 					$statement->bind_param("s", $target_date);
 					$statement->execute();
 					$result2 = $statement->get_result();
 					
 					$jsonArray = array();
-					if ($row = $result->fetch_assoc()) {
-						$jsonArray[$row["status"]][$row["id"]]["report_id"]		= $row["report_id"];
-						$jsonArray[$row["status"]][$row["id"]]["category_id"]	= $row["category_id"];
-						$jsonArray[$row["status"]][$row["id"]]["location_id"]	= $row["location_id"];
-						$jsonArray[$row["status"]][$row["id"]]["created"]		= $row["created"];
+					while ($row = $result->fetch_assoc()) {
+						$jsonArray[$row["status"]][] = array (
+							"id" 			=> $row["id"],
+							"report_id" 	=> $row["report_id"],
+							"category_id"	=> $row["category_id"],
+							"location_id"	=> $row["location_id"],
+							"created"		=> $row["created"]
+						);
 					}
-					if ($row = $result2->fetch_assoc()) {
-						$jsonArray[$row["status"]][$row["id"]]["report_id"]		= $row["report_id"];
-						$jsonArray[$row["status"]][$row["id"]]["category_id"]	= $row["category_id"];
-						$jsonArray[$row["status"]][$row["id"]]["location_id"]	= $row["location_id"];
-						$jsonArray[$row["status"]][$row["id"]]["created"]		= $row["created"];
+					
+					while ($row = $result2->fetch_assoc()) {
+						$jsonArray[$row["status"]][] = array (
+							"id" 			=> $row["id"],
+							"report_id" 	=> $row["report_id"],
+							"category_id"	=> $row["category_id"],
+							"location_id"	=> $row["location_id"],
+							"created"		=> $row["created"]
+						);
 					}
 					
 					
-					echo json_encode($jsonArray);
+					header('Content-Type: application/json');
 					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+					echo json_encode($jsonArray, JSON_PRETTY_PRINT);
 				} else {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}

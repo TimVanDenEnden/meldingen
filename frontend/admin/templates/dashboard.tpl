@@ -272,7 +272,6 @@ $(document).ready(function() {
 			
 			$.each(data, function(key, val) {
 				$.each(val, function(key2, val2) {
-					var report_id = key2;
 					var statusTagColor = "";
 					if (key == "0") {
 						statusTagColor = "animation-status";
@@ -284,7 +283,7 @@ $(document).ready(function() {
 					
 					var html = '\
 	<div class="card bg-container" style="background-image: url(http://meldingen.dev/api/content/images/system/2017/04/30/2017043011080000000058ec9cf0cc0d7.jpg);">\
-		<h3 class="status"><span class="label '+statusTagColor+'">#'+report_id+'</span></h3>\
+		<h3 class="status"><span class="label '+statusTagColor+'">#'+val2.id+'</span></h3>\
 		<div class="body">\
 			<div class="row">\
 				<div class="col-xs-12 vertical-align-md" style="margin-bottom: 0px;">\
@@ -310,13 +309,6 @@ $(document).ready(function() {
 					';
 					
 					items.push(html);
-					$.each(val2, function(key3, val3) {
-						items.push("KEY 3 >> "+key3);
-						items.push("<tr>");
-						items.push("<td>" + key3 + "</td>");
-						items.push("<td>" + val3 + "</td>");
-						items.push("</tr>");
-					});
 				});
 			});
 	
