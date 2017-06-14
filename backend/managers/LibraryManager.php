@@ -12,7 +12,7 @@ class LibraryManager {
 		MAIN TEMPLATES
 	********************/
 	
-	private function renderPage($title, $content) {		
+	private function renderPage($title, $content) {
 		$loader = new Loader(new MainTemplate());
 		$data = array(
 			'title'		=> $title." | "._PageTitle,

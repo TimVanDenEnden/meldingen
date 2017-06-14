@@ -13,6 +13,7 @@ final class APP {
 	private $database;
 	private static $mysqli;
 	private static $report;
+	private static $admin;
 	private static $images;
 	private static $register;
 	private static $login;
@@ -23,6 +24,7 @@ final class APP {
 		require _ROOT."/includes/database.php";
 		require _ROOT."/includes/databaseCreateTables.php";
 		require _ROOT."/functions/report.php";
+		require _ROOT."/functions/admin.php";
 		require _ROOT."/functions/images.php";
 		require _ROOT."/controller/register.php";
 		require _ROOT."/controller/login.php";
@@ -34,6 +36,7 @@ final class APP {
 		}
 
 		self::$report 	= new Report();
+		self::$admin 	= new Admin();
 		self::$images 	= new Images();
 		self::$register = new Registration();
 		self::$login 	= new Login();
@@ -49,10 +52,22 @@ final class APP {
 		if (isset($_GET['sys']) && $_GET['sys'] != null) {
 			switch ($_GET['sys']) {
 				case "report":
+					//print_r($_POST);
+					//header($_SERVER["SERVER_PROTOCOL"]." 200 Forbidden");
+					//return;
+				
 					if (isset($_GET['data']) && $_GET['data'] != null) {
 						APP::getReport()->get($_GET['data']);
 					} else if (isset($_POST["report_id"])) {
 						APP::getReport()->postReport();
+					} else {
+						print_r($_POST);
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+					}
+					break;
+				case "admin":
+					if (isset($_GET['data']) && $_GET['data'] != null) {
+						APP::getAdmin()->get($_GET['data']);
 					} else {
 						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 					}
@@ -138,6 +153,10 @@ final class APP {
 	
 	public static function getReport() {
 		return self::$report;
+	}
+	
+	public static function getAdmin() {
+		return self::$admin;
 	}
 	
 	public static function getImages() {

@@ -16,6 +16,7 @@ class Report {
 					));
 				}
 				
+				
 				echo json_encode($jsonArray);
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 				break;
@@ -29,6 +30,7 @@ class Report {
 						"name"	=> $row["name"]
 					));
 				}
+				
 				
 				echo json_encode($jsonArray);
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
@@ -74,6 +76,7 @@ class Report {
 					));
 				}
 				
+				
 				echo json_encode($jsonArray);
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
 				break;
@@ -87,6 +90,7 @@ class Report {
 						"name"	=> $row["name"]
 					));
 				}
+				
 				
 				echo json_encode($jsonArray);
 				header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
@@ -111,6 +115,7 @@ class Report {
 							"data"	=> $row["data"]
 						));
 					}
+					
 					
 					echo json_encode($jsonArray);
 					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
@@ -142,6 +147,7 @@ class Report {
 						$stmt2 = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."reports SET report_id = ? WHERE id = ?");
 						$stmt2->bind_param("si", $report_id, $insert_id);
 						$stmt2->execute();
+						
 						
 						echo json_encode(array("report_id" => $report_id));
 						header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
@@ -345,6 +351,7 @@ class Report {
 						$stmt2 = APP::getMysqli()->prepare("UPDATE "._DB_PREFIX."perpetrators SET perpetrator_id = ? WHERE id = ?");
 						$stmt2->bind_param("si", $perpetrator_id, $insert_id);
 						$stmt2->execute();
+						
 						
 						echo json_encode(array(
 							"perpetrator_id" 	=> $perpetrator_id,

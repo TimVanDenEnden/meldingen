@@ -80,8 +80,9 @@ class CreateTables {
 		/*
 			status:
 				0: Open
-				1: Solved
-				2: Transferred
+				1: In process
+				2: Solved
+				3: Transferred
 		
 			sex:
 				0: onbekend
