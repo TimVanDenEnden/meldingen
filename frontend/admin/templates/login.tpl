@@ -1,16 +1,3 @@
-<div class="container p-sm-0">
-	<div class="headerImage"></div>
-	<div class="block-header">
-		<div class="card">
-			<div class="header headerTitle">
-				AdminPanel
-			</div>
-<!-- 			<div class="header headerTitle">
-				Aanmelden
-			</div> -->
-		</div>
-	</div>
-</div>
 <div class="container">
 	<div class="card">
 		<div class="header mldColor">

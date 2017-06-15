@@ -1,4 +1,4 @@
-﻿{% set category_name = '' %}
+{% set category_name = '' %}
 {% for category in categories %}
 	{% if category.id == category_id  %}
 		{% set category_name = category.name ~ ' - ' %}
