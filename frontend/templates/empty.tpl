@@ -79,9 +79,7 @@
             </div>
         </aside>
     </section>
-    <section class="content">
-		{{ CONTENT | raw }}
-    </section>
+    <section class="content">{{ CONTENT | raw }}</section>
     <script>
         $('.btn-toggle').click(function() {
             $(this).find('.btn').toggleClass('active');  

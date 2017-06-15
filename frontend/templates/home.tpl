@@ -1,4 +1,4 @@
-﻿<div class="container p-sm-0">
+<div class="container p-sm-0">
 	<div class="headerImage"></div>
 	<div class="block-header">
 		<div class="card">

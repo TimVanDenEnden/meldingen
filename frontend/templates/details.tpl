@@ -1,5 +1,5 @@
-﻿<div class="container p-sm-0">
-	<div class="headerImage"></div>
+<div class="container p-sm-0">
+<div class="headerImage"></div>
 	<div class="block-header">
 		<div class="card">
 			<div class="header headerTitle">
