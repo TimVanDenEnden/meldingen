@@ -40,17 +40,21 @@ final class APP {
 						case "data":
 							echo APP::getDataManager()->getData();
 							break;
+						case "login":
+							if (!APP::isLoggedIn()) {
+								APP::getLibraryManager()->getAdminLoginPage();
+							} else {
+								header("Location: "._PageURL."admin/dashboard");
+							}
+							break;
+						case "logout":
+							echo APP::logout();
+							header("Location: "._PageURL."admin/dashboard");
+							break;
 						default:
 							if (APP::isLoggedIn()) {
 								//if (APP::getUserManager()->getPermission() > 0) {
 									switch ($_REQUEST['page']) {
-										case "login":
-											if (!APP::isLoggedIn()) {
-												APP::getLibraryManager()->getAdminLoginPage();
-											} else {
-												header("Location: "._PageURL."admin/dashboard");
-											}
-											break;
 										case "dashboard":
 											APP::getLibraryManager()->getAdminDashboardPage();
 											break;
@@ -118,6 +122,7 @@ final class APP {
 							} else {
 								APP::getLibraryManager()->getAdminLoginPage();
 							}
+						break;
 					}
 				} else {
 					header("Location: "._PageURL."admin/dashboard");
@@ -182,6 +187,22 @@ final class APP {
 			if ($response == "true") {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	public static function logout() {
+		$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
+		session_write_close();
+		
+		$ch = curl_init(_API_URL."logout");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_COOKIE, $strCookie); 
+		$response = curl_exec($ch); 
+		curl_close($ch); 
+
+		if ($response != null && $response != "") {
+			return true;
 		}
 		return false;
 	}

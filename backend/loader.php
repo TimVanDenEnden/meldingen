@@ -30,7 +30,7 @@ class Loader {
 			$tmp_name 		= explode('/', $template);
 			$loadername_e 	= explode('/', $loadername);
 			$tmp_name 		= $loadername != null ? end($loadername_e) : end($tmp_name);
-			$tmp = "Loader_".$tmp_name;
+			$tmp = "Loader_".($this->isAdmin ? "Admin_" : "").$tmp_name;
 			$loader = new $tmp($this->twig, $this->loaderdata);
 			$loader->run();
 			$data = $loader->getData();

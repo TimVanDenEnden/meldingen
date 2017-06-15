@@ -2,7 +2,7 @@
 
 require_once _ROOT."/backend/loaders/loader.extend.php";
 
-class Loader_Admin_Login extends LoaderExtend {
+class Loader_Admin_Empty extends LoaderExtend {
 	
 	public function getData() {
 		return array(

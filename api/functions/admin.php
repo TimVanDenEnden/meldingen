@@ -21,10 +21,10 @@ class Admin {
 				break;
 			case "recentReports":
 				if (APP::getLogin()->isUserLoggedIn()) {
-					$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."reports WHERE status <= 1 ORDER BY created DESC");
+					$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."reports WHERE status <= 1 ORDER BY created DESC, status DESC");
 					
 					$target_date = date('Y-m-d', strtotime('-1 day'));
-					$sql = "SELECT * FROM "._DB_PREFIX."reports WHERE status='2' AND DATE(modified) >= ? ORDER BY created DESC";
+					$sql = "SELECT * FROM "._DB_PREFIX."reports WHERE status='2' AND DATE(modified) >= ? ORDER BY created DESC, status DESC";
 					$statement = APP::getMysqli()->prepare($sql);
 					$statement->bind_param("s", $target_date);
 					$statement->execute();

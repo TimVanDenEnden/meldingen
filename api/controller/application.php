@@ -112,15 +112,23 @@ final class APP {
 						header("Location: ".$url);
 					}	
 					break;
-				case "logout":
-					if (APP::getLogin()->isUserLoggedIn()) {
-						APP::getLogin()->logout();
-						$return = array();
-						$return["errors"] = APP::getLogin()->errors;
-						$return["messages"] = APP::getLogin()->messages;
-						echo json_encode($return);
-					} else {
-						// already loggedout
+				case "logout"://http://meldingen.dev/api/logout/http%3A%2F%2Fmeldingen.dev%2Fadmin%2Fdashboard
+					APP::getLogin()->logout();
+					$return = array();
+					$return["errors"] = APP::getLogin()->errors;
+					$return["messages"] = APP::getLogin()->messages;
+					echo json_encode($return);
+						
+					if (isset($_GET['data']) && $_GET['data'] != null) { // Return URL
+						$url = urldecode($_GET['data']);
+						if (!(substr($url, 0, 7) === "http://" || substr($url, 0, 8) === "https://")) {
+							if (substr($url, 0, 6) === "http:/") {
+								$url = preg_replace('/^'.preg_quote("http:/", '/').'/', 'http://', $url);
+							} else if (substr($url, 0, 7) === "https:/") {
+								$url = preg_replace('/^'.preg_quote("https:/", '/').'/', 'https://', $url);
+							}
+						}
+						header("Location: ".$url);
 					}
 					break;
 				case "request_loggedin":

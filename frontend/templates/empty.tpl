@@ -58,7 +58,7 @@
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
-                <div class="spinner-layer pl-red">
+                <div class="spinner-layer pl-blue">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
                     </div>
@@ -79,9 +79,9 @@
             </div>
         </aside>
     </section>
-    <section class="content">
+	<section class="content">
 		{{ CONTENT | raw }}
-    </section>
+	</section>
     <script>
         $('.btn-toggle').click(function() {
             $(this).find('.btn').toggleClass('active');  

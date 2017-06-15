@@ -19,9 +19,7 @@ class Login {
 
 	public function logout() {
 		$this->reset();
-		if (isset($_GET["logout"])) {
-			$this->doLogout();
-		}
+		$this->doLogout();
 	}
 	
 	private function reset() {
@@ -105,12 +103,20 @@ class Login {
 	*/
 	public function doLogout()
 	{
-		// delete the session of the user
-		$_SESSION = array();
-		session_destroy();
-		// return a little feeedback message
-		$this->messages[] = "You have been logged out.";
-		header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+		try {
+			echo "test 1";
+			// delete the session of the user
+			$_SESSION = array();
+			echo "test 2";
+			session_destroy();
+			// return a little feeedback message
+			echo "test 3";
+			$this->messages[] = "You have been logged out.";
+			echo "test 4";
+			header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+		} catch (Exception $e) {
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
 	}
 	
 	/**

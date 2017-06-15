@@ -32,6 +32,7 @@ Options -Indexes
 	
 	#LOGIN FIX
 	RewriteRule ^login/(.*) index.php?sys=login&data=$1 [NC,B,QSA]
+	RewriteRule ^logout/(.*) index.php?sys=login&data=$1 [NC,B,QSA]
 	
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d

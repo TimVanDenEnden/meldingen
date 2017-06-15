@@ -77,11 +77,19 @@ class LibraryManager {
 		ADMIN TEMPLATES
 	********************/
 	
-	private function renderAdminPage($title, $content) {		
+	private function renderAdminPage($title, $content, $hide_nav = false) {
+		$loader = new Loader(new AdminTemplate(), true);
+		$data = array(
+			'HeaderTitle'	=> $title,
+			'HIDE_NAV'		=> $hide_nav,
+			'ADMIN_CONTENT'	=> $content,
+		);
+		$contentTemplate = $loader->load('empty', $data);
+		
 		$loader = new Loader(new MainTemplate());
 		$data = array(
 			'title'		=> $title." | Admin | "._PageTitle,
-			'CONTENT'	=> $content,
+			'CONTENT'	=> $contentTemplate,
 		);
 		echo $loader->load('empty', $data);
 	}
@@ -246,6 +254,6 @@ class LibraryManager {
 	*/
 	public function getAdminLoginPage() {
 		$loader = new Loader(new AdminTemplate(), true);
-		echo $this->renderAdminPage("Login", $loader->load('login'));
+		echo $this->renderAdminPage("Login | AdminPanel", $loader->load('login'), true);
 	}
 }
