@@ -1,8 +1,5 @@
 <div class="container">
-	<div class="card">
-		<div class="header mldColor">
-		    <h2>Login</h2>
-		</div>
+	<div class="card m-t-30">
 		<div class="body">
             <form id="sign_in" method="post" action="{{ API_URL }}login/{{ RETURN_URL }}" name="loginform" novalidate="novalidate">
                     <div class="input-group">
