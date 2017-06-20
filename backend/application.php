@@ -58,61 +58,6 @@ final class APP {
 										case "dashboard":
 											APP::getLibraryManager()->getAdminDashboardPage();
 											break;
-										case "forms":
-											if (isset($_REQUEST['type']) && $_REQUEST['type'] != null) {
-												switch ($_REQUEST['type']) {
-													case "application":
-													case "contact":
-														if (isset($_REQUEST['id']) && $_REQUEST['id'] != null) {
-															$this->library->getAdminFormsForm($_REQUEST['type'], $_REQUEST['id']);
-														} else {
-															$this->library->getAdminFormsPage($_REQUEST['type']);
-														}
-														break;
-													default:
-														$this->library->getAdminFormsPage("application");
-												}
-											} else {
-												$this->library->getAdminFormsPage("application");
-											}
-											break;
-										case "translations":
-											$this->library->getAdminTranslationsPage();
-											break;
-										case "users":
-											$this->library->getAdminUsersPage();
-											break;
-										case "pages":
-											if (isset($_REQUEST['p']) && $_REQUEST['p'] != null) {
-												switch ($_REQUEST['p']) {
-													case "faq":
-														$this->library->getAdminPagesFAQPage();
-														break;
-													case "news":
-														$this->library->getAdminPagesNewsPage();
-														break;
-													case "ihfm":
-														$this->library->getAdminPagesIHFMPage();
-														break;
-													case "origins":
-														$this->library->getAdminPagesOriginsPage();
-														break;
-													case "history":
-														$this->library->getAdminPagesHistoryPage();
-														break;
-													case "downloads":
-														$this->library->getAdminPagesDownloadsPage();
-														break;
-													case "contact":
-														$this->library->getAdminPagesContactPage();
-														break;
-													default:
-														$this->library->getAdminPageNotFound();
-												}
-											} else {
-												$this->library->getAdminPageNotFound();
-											}
-											break;
 										default:
 											$this->library->getAdminPageNotFound();
 									}
