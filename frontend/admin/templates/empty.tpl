@@ -125,10 +125,10 @@ h3.status span.label.bg-green:before {
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="#"><i class="material-icons">dashboard</i> Dashboard</a>
+						<a href="{{ PageURL }}admin/dashboard"><i class="material-icons">dashboard</i> Dashboard</a>
 					</li>
 					<li>
-						<a href="#"><i class="material-icons">account_balance</i> Archief</a>
+						<a href="{{ PageURL }}admin/archief"><i class="material-icons">account_balance</i> Archief</a>
 					</li>
 					<li>
 						<a href="#"><i class="material-icons">build</i> Pagina Bouwer</a>
@@ -136,7 +136,7 @@ h3.status span.label.bg-green:before {
 				</ul>
 				<ul class="nav navbar-nav navbar-right m-r-0">
 					<li><a href="#"><i class="material-icons">people</i> Gebruikers</a></li>
-					<li><a href="{{ SiteURL }}admin/logout"><i class="material-icons">input</i> Uitloggen</a></li>
+					<li><a href="{{ PageURL }}admin/logout"><i class="material-icons">input</i> Uitloggen</a></li>
 				</ul>
 			</div>
 		</nav>
