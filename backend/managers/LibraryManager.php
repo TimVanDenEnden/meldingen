@@ -129,6 +129,11 @@ class LibraryManager {
 		$loader = new Loader(new AdminTemplate(), true);
 		echo $this->renderAdminPage("Dashboard", $loader->load('dashboard'));
 	}
+
+	public function getAdminArchiefPage() {
+		$loader = new Loader(new AdminTemplate(), true);
+		echo $this->renderAdminPage("Archief", $loader->load('archief'));
+	}
 	/*
 	public function getAdminFormsPage($type) {
 		$loaderdata = array(
