@@ -59,6 +59,30 @@ class Admin {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
 				break;
+			case "archiveReports":
+				if (APP::getLogin()->isUserLoggedIn()) {
+					$result = APP::getMysqli()->query("SELECT * FROM "._DB_PREFIX."reports WHERE status >= 2 AND isdeleted < 1 ORDER BY id DESC, status DESC");
+					$jsonArray = array();
+					
+					while ($row = $result->fetch_assoc()) {
+						$jsonArray[] = array (
+							"id" 			=> $row["id"],
+							"status" 		=> $row["status"],
+							"report_id" 	=> $row["report_id"],
+							"category_id"	=> $row["category_id"],
+							"location_id"	=> $row["location_id"],
+							"created"		=> $row["created"],
+							"modified"		=> $row["modified"]
+						);
+					}
+					
+					header('Content-Type: application/json');
+					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+					echo json_encode($jsonArray, JSON_PRETTY_PRINT);
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
 			case "test_getreports":
 				if (isset($_GET['report_id']) && $_GET['report_id'] != null) {
 					$sql = "SELECT * FROM "._DB_PREFIX."reports WHERE report_id=?";

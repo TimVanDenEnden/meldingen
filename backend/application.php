@@ -142,7 +142,7 @@ final class APP {
 		
 		$ch = curl_init(_API_URL."logout");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-		curl_setopt($ch, CURLOPT_COOKIE, $strCookie); 
+		curl_setopt($ch, CURLOPT_COOKIE, $strCookie);
 		$response = curl_exec($ch); 
 		curl_close($ch); 
 
