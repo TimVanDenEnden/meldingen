@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Meldingen</title>
+    <title>{{ title }}</title>
     <!-- Favicon-->
     <link rel="icon" href="{{ SiteURL }}frontend/assets/images/favicon.jpg" type="image/x-icon">
 
