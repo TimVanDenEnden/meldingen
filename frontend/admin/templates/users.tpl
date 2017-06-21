@@ -121,5 +121,4 @@
 			<button type="submit" name="postreport" class="btn btnSubmit btn-block btn-lg btn-default waves-effect fontsize18">Voeg gebruiker toe</button>
 		</div>
 	</div>
->>>>>>> 089641f5b0325218264ca0eaa60037f58eed0ef4
 </div>
