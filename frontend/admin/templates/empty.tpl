@@ -135,7 +135,7 @@ h3.status span.label.bg-green:before {
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right m-r-0">
-					<li><a href="#"><i class="material-icons">people</i> Gebruikers</a></li>
+					<li><a href="{{ PageURL }}admin/users"><i class="material-icons">people</i> Gebruikers</a></li>
 					<li><a href="{{ PageURL }}admin/logout"><i class="material-icons">input</i> Uitloggen</a></li>
 				</ul>
 			</div>

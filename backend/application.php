@@ -61,6 +61,9 @@ final class APP {
 										case "archief":
 											APP::getLibraryManager()->getAdminArchiefPage();
 											break;
+										case "users":
+											APP::getLibraryManager()->getAdminUsersPage();
+											break;
 										default:
 											$this->library->getAdminPageNotFound();
 									}
