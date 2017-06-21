@@ -130,9 +130,9 @@ class LibraryManager {
 		echo $this->renderAdminPage("Dashboard", $loader->load('dashboard'));
 	}
 
-	public function getAdminArchiefPage() {
+	public function getAdminArchivePage() {
 		$loader = new Loader(new AdminTemplate(), true);
-		echo $this->renderAdminPage("Archief", $loader->load('archief'));
+		echo $this->renderAdminPage("Archief", $loader->load('archive'));
 	}
 	/*
 	public function getAdminFormsPage($type) {

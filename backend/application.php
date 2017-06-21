@@ -58,8 +58,8 @@ final class APP {
 										case "dashboard":
 											APP::getLibraryManager()->getAdminDashboardPage();
 											break;
-										case "archief":
-											APP::getLibraryManager()->getAdminArchiefPage();
+										case "archive":
+											APP::getLibraryManager()->getAdminArchivePage();
 											break;
 										default:
 											$this->library->getAdminPageNotFound();

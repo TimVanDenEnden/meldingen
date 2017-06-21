@@ -130,6 +130,15 @@ section.content {
 	}
 }
 
+@media (max-width: 767px) {
+	.navbar .navbar-nav {
+		margin-bottom: 10px;
+	}
+	.navbar .nav > li {
+		display: block;
+	}
+}
+
 /************************
 *	TEXT ALIGNMENTS
 /***********************/
