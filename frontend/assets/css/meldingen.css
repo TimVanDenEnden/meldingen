@@ -139,6 +139,10 @@ section.content {
 	}
 }
 
+i.middle {
+	vertical-align: middle;
+}
+
 /************************
 *	TEXT ALIGNMENTS
 /***********************/

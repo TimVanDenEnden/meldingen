@@ -212,6 +212,17 @@ class CreateTables {
 				UNIQUE KEY `user_email` (`user_email`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data';
 		");
+		
+		
+		$this->create("
+			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."users_permissions (
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				user_id TINYTEXT NOT NULL,
+				permission TINYTEXT NOT NULL,
+				value INT(1) NOT NULL,
+				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+			)
+		");
 	}
 	
 	private function create($sql) {
