@@ -131,7 +131,7 @@ h3.status span.label.bg-green:before {
 						<a href="{{ PageURL }}admin/archive"><i class="material-icons">account_balance</i> Archief</a>
 					</li>
 					<li>
-						<a href="#"><i class="material-icons">build</i> Pagina Bouwer</a>
+						<a href="{{ PageURL }}admin/pagebuilder"><i class="material-icons">build</i> Pagina Bouwer</a>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right m-r-0">

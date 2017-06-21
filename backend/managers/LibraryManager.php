@@ -139,6 +139,16 @@ class LibraryManager {
 		$loader = new Loader(new AdminTemplate(), true);
 		echo $this->renderAdminPage("Gebruikers", $loader->load('users'));
 	}
+
+	public function getAdminReportPage() {
+		$loader = new Loader(new AdminTemplate(), true);
+		echo $this->renderAdminPage("Report", $loader->load('report'));
+	}
+
+	public function getAdminPageBuilderPage() {
+		$loader = new Loader(new AdminTemplate(), true);
+		echo $this->renderAdminPage("Pagina Bouwer", $loader->load('pagebuilder'));
+	}
 	/*
 	public function getAdminFormsPage($type) {
 		$loaderdata = array(

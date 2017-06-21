@@ -276,9 +276,9 @@ var RecentReports = function (api_url) {
 						</p>\
 					</div>\
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right text-center-sm" style="margin-bottom: 0px;">\
-						<button type="button" class="btn btn-default btn-circle-lg waves-effect waves-circle waves-float">\
+						<a href="{{ PageURL }}admin/report/'+val2.id+'" type="button" class="btn btn-default btn-circle-lg waves-effect waves-circle waves-float">\
 							<i class="material-icons">mode_edit</i>\
-						</button>\
+						</a>\
 						<button type="button" class="btn btn-default btn-circle-lg waves-effect waves-circle waves-float m-l-10">\
 							<i class="material-icons">delete</i>\
 						</button>\
