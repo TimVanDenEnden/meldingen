@@ -127,12 +127,16 @@ h3.status span.label.bg-green:before {
 					<li>
 						<a href="{{ PageURL }}admin/dashboard"><i class="material-icons">dashboard</i> Dashboard</a>
 					</li>
-					<li>
-						<a href="{{ PageURL }}admin/archive"><i class="material-icons">account_balance</i> Archief</a>
-					</li>
-					<li>
-						<a href="{{ PageURL }}admin/pagebuilder"><i class="material-icons">build</i> Pagina Bouwer</a>
-					</li>
+					{% if hasPermission("ARCHIVE_CAN_VIEW") %}
+						<li>
+							<a href="{{ PageURL }}admin/archive"><i class="material-icons">account_balance</i> Archief</a>
+						</li>
+					{% endif %}
+					{% if hasPermission("PAGEBUILDER_USE") %}
+						<li>
+							<a href="{{ PageURL }}admin/pagebuilder"><i class="material-icons">build</i> Pagina Bouwer</a>
+						</li>
+					{% endif %}
 				</ul>
 				<ul class="nav navbar-nav navbar-right m-r-0">
 					<li><a href="{{ PageURL }}admin/users"><i class="material-icons">people</i> Gebruikers</a></li>

@@ -14,6 +14,11 @@ class AdminTemplate extends TemplateExtend {
 			))
 		);
 		
+		$function = new Twig_SimpleFunction('hasPermission', function ($permission) {
+			return APP::hasPermission($permission);
+		});
+		parent::getTwig()->addFunction($function);
+		
 		parent::getTwig()->addExtension(new Twig_Extension_Debug());
 		parent::getTwig()->clearCacheFiles();
 	}

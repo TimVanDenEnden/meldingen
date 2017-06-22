@@ -71,8 +71,19 @@ class Admin {
 			case "userPermissions":
 				if (APP::getLogin()->isUserLoggedIn()) {
 					if (isset($_REQUEST["user_id"])) {
-						$user_id 	= $_REQUEST["user_id"];
-						$jsonArray 	= array();
+						$user_id 	= $_REQUEST["user_id"] == "own" ? $_SESSION['user_id'] : $_REQUEST["user_id"];
+						$jsonArray 	= array( //defaults
+							"DASHBOARD_CAN_EDIT"	=> 0,
+							"DASHBOARD_CAN_REMOVE"	=> 0,
+							"ARCHIVE_CAN_VIEW"		=> 0,
+							"ARCHIVE_CAN_EDIT"		=> 0,
+							"ARCHIVE_CAN_REMOVE"	=> 0,
+							"USERS_CAN_VIEW"		=> 0,
+							"USERS_CAN_ADD"			=> 0,
+							"USERS_CAN_EDIT"		=> 0,
+							"USERS_CAN_REMOVE"		=> 0,
+							"PAGEBUILDER_USE"		=> 0,
+						);
 						
 						$sql = "SELECT * FROM "._DB_PREFIX."users_permissions WHERE user_id = ?";
 						$statement = APP::getMysqli()->prepare($sql);
@@ -93,6 +104,54 @@ class Admin {
 				} else {
 					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 				}
+				break;
+			case "users":
+				if (APP::getLogin()->isUserLoggedIn()) {
+					$jsonArray 	= array();
+					$result = APP::getMysqli()->query("SELECT user_id, user_name, user_email, user_isadmin FROM "._DB_PREFIX."login_users");
+					
+					while ($row = $result->fetch_assoc()) {
+						$jsonArray[$row["user_id"]]["user_name"] 	= $row["user_name"];
+						$jsonArray[$row["user_id"]]["user_email"] 	= $row["user_email"];
+						$jsonArray[$row["user_id"]]["user_isadmin"] = $row["user_isadmin"];
+					}
+					
+					header('Content-Type: application/json');
+					header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+					echo json_encode($jsonArray, JSON_PRETTY_PRINT);
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
+			case "updateuser":
+				if (APP::getLogin()->isUserLoggedIn()) {
+					var_dump($_POST);
+					if (isset($_POST["updateuser"])) {
+						$sql = "SELECT * FROM "._DB_PREFIX."users_permissions WHERE user_id = ?";
+						$statement = APP::getMysqli()->prepare($sql);
+						$statement->bind_param("i", $_SESSION['user_id']);
+						$statement->execute();
+						
+						foreach ($_POST as $post) {
+							if (substr($post, 0, 12 ) === "users_check_") {
+								$permission = str_replace("users_check_", "", $post);
+								$value = 1;
+								
+								$sql = "INSERT INTO "._DB_PREFIX."users_permissions (user_id, permission, value) VALUES (?, ?, ?)";
+								$statement = APP::getMysqli()->prepare($sql);
+								$statement->bind_param("isi", $_SESSION['user_id'], $permission, $value);
+								$statement->execute();
+							}
+						}
+						
+						header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+					} else {
+						header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+					}
+				} else {
+					header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+				}
+				break;
 			default:
 				header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 		}

@@ -15,6 +15,7 @@ final class APP {
 	//private static $hybridauth;
 	//private static $loginmanager;
 	//private static $usermanager;
+	private static $permission_cache = null;
 	
 	public function __construct() {
 		session_start();
@@ -160,6 +161,28 @@ final class APP {
 
 		if ($response != null && $response != "") {
 			return true;
+		}
+		return false;
+	}
+	
+	public static function hasPermission($permission) {
+		if (self::$permission_cache == null) {
+			$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
+			session_write_close();
+			
+			$ch = curl_init(_API_URL."admin/userPermissions/o");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt($ch, CURLOPT_COOKIE, $strCookie);
+			self::$permission_cache = curl_exec($ch);
+			curl_close($ch);
+			
+			if (self::$permission_cache != null && self::$permission_cache != "") {
+				self::$permission_cache = json_decode(self::$permission_cache);
+			}
+		}
+
+		if (isset(self::$permission_cache->$permission)) {
+			return self::$permission_cache->$permission;
 		}
 		return false;
 	}
