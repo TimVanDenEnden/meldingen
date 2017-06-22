@@ -217,7 +217,7 @@ class CreateTables {
 		$this->create("
 			CREATE TABLE IF NOT EXISTS "._DB_PREFIX."users_permissions (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				user_id TINYTEXT NOT NULL,
+				user_id int(11) NOT NULL,
 				permission TINYTEXT NOT NULL,
 				value INT(1) NOT NULL,
 				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP

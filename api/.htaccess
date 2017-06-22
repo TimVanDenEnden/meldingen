@@ -27,8 +27,10 @@ Options -Indexes
 	
 	RewriteRule ^image/(.*)_(\d{4})(\d{2})(\d{2})(.*)_(.*) /api/content/images/$1/$2/$3/$4/$5.$6 [R=301,QSA,L]
 	
-	RewriteRule ^report/createreport/([^/]+) index.php?sys=report&data=createreport&category_id=$1 [NC,QSA]
-	RewriteRule ^report/pageblocks/([^/]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,QSA]
+	RewriteRule ^admin/userPermissions/([0-9]+) index.php?sys=admin&data=userPermissions&user_id=$1 [NC,QSA]
+	
+	RewriteRule ^report/createreport/([0-9]+) index.php?sys=report&data=createreport&category_id=$1 [NC,QSA]
+	RewriteRule ^report/pageblocks/([0-9]+) index.php?sys=report&data=pageblocks&category_id=$1 [NC,QSA]
 	
 	#LOGIN FIX
 	RewriteRule ^login/(.*) index.php?sys=login&data=$1 [NC,B,QSA]
