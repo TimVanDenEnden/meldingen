@@ -15,7 +15,8 @@ final class APP {
 	//private static $hybridauth;
 	//private static $loginmanager;
 	//private static $usermanager;
-	private static $permission_cache = null;
+	private static $permission_cache 	= null;
+	private static $user_isadmin_cache 	= null;
 	
 	public function __construct() {
 		session_start();
@@ -166,6 +167,30 @@ final class APP {
 	}
 	
 	public static function hasPermission($permission) {
+		if (self::$user_isadmin_cache == null) {
+			$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
+			session_write_close();
+			
+			$ch = curl_init(_API_URL."admin/users");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt($ch, CURLOPT_COOKIE, $strCookie);
+			self::$user_isadmin_cache = curl_exec($ch);
+			curl_close($ch);
+			
+			if (self::$user_isadmin_cache != null && self::$user_isadmin_cache != "") {
+				self::$user_isadmin_cache = json_decode(self::$user_isadmin_cache);
+				
+				//if (isset(self::$user_isadmin_cache->)) {
+					
+				//}
+				
+				/*
+					TODO:
+					Add is admin check
+				*/
+			}
+		}
+		
 		if (self::$permission_cache == null) {
 			$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
 			session_write_close();
